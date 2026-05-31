@@ -204,7 +204,7 @@ export default function RankingPage() {
                 {desbloqueadas.length}/{conquistas.length || '—'}
               </span>
             </div>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 sm:grid-cols-4 gap-2 sm:gap-3">
               {conquistas.slice(0, 8).map((c) => {
                 const { Icon, cor } = conquistaIcone(c.icone);
                 return (
