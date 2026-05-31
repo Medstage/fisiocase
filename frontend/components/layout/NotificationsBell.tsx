@@ -53,10 +53,12 @@ export function NotificationsBell() {
     refetchInterval: 30_000,
   });
 
-  // Missões diárias pendentes como complemento
+  // Missões diárias — MESMA queryKey usada na aba Ranking pra compartilhar cache.
+  // Ver: app/(dashboard)/ranking/page.tsx
   const missoesQ = useQuery({
-    queryKey: ['missoes-bell'],
+    queryKey: ['missoes-diarias'],
     queryFn: async () => (await api.get('/api/missoes/diarias')).data as { missoes: Missao[] },
+    refetchInterval: 30_000,
   });
 
   const marcarTodasLidas = useMutation({

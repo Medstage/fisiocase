@@ -39,6 +39,7 @@ export default function FeedbackPage() {
   const { id } = useParams<{ id: string }>();
   const [extra, setExtra] = useState<Extra>({});
   const [mostrarEfeito, setMostrarEfeito] = useState(false);
+  const [conquistasParaModal, setConquistasParaModal] = useState<ConquistaLite[]>([]);
 
   useEffect(() => {
     try {
@@ -46,7 +47,6 @@ export default function FeedbackPage() {
       if (raw) {
         const parsed = JSON.parse(raw) as Extra;
         setExtra(parsed);
-        if (parsed.conquistas && parsed.conquistas.length > 0) setMostrarEfeito(true);
       }
     } catch {
       /* ignore */
@@ -66,6 +66,33 @@ export default function FeedbackPage() {
     },
   });
 
+  // Estado real das conquistas no servidor (decide quem ainda precisa de modal).
+  interface ConquistaServidor {
+    id: string;
+    desbloqueada?: boolean;
+    notificadoEm?: string | null;
+  }
+  const { data: conquistasServidor } = useQuery({
+    queryKey: ['conquistas'],
+    queryFn: async () => (await api.get('/api/conquistas')).data as { conquistas: ConquistaServidor[] },
+  });
+
+  // Cruzamento: só mostra modal de conquistas (a) que vieram com a submissão
+  // E (b) que o servidor confirma como desbloqueadas + ainda não notificadas.
+  useEffect(() => {
+    if (!extra.conquistas || extra.conquistas.length === 0) return;
+    if (!conquistasServidor?.conquistas) return;
+    const mapa = new Map(conquistasServidor.conquistas.map((c) => [c.id, c]));
+    const pendentes = extra.conquistas.filter((c) => {
+      const srv = mapa.get(c.id);
+      return srv?.desbloqueada && !srv.notificadoEm;
+    });
+    if (pendentes.length > 0 && !mostrarEfeito) {
+      setConquistasParaModal(pendentes);
+      setMostrarEfeito(true);
+    }
+  }, [extra.conquistas, conquistasServidor, mostrarEfeito]);
+
   if (isLoading) {
     return (
       <div className="flex items-center gap-2 text-neutral-600">
@@ -83,7 +110,7 @@ export default function FeedbackPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className="max-w-3xl mx-auto">
-      {mostrarEfeito && <ConquistaUnlocked conquistas={conquistas} onClose={() => setMostrarEfeito(false)} />}
+      {mostrarEfeito && <ConquistaUnlocked conquistas={conquistasParaModal} onClose={() => setMostrarEfeito(false)} />}
 
       {/* Header */}
       <header className="mb-8 border-b border-black pb-4 flex items-center gap-4">

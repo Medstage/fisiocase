@@ -89,8 +89,9 @@ export default function RankingPage() {
     queryKey: ['rank-posicao'],
     queryFn: async () => (await api.get('/api/ranking/posicao')).data as { posicao: number; xpTotal: number; total: number },
   });
+  // MESMA queryKey usada pelo NotificationsBell pra compartilhar cache (Bug 2).
   const missoesQ = useQuery({
-    queryKey: ['rank-missoes'],
+    queryKey: ['missoes-diarias'],
     queryFn: async () => (await api.get('/api/missoes/diarias')).data as { missoes: Missao[] },
   });
   const conquistasQ = useQuery({

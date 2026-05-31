@@ -84,7 +84,7 @@ export const enviar: RequestHandler = async (req, res) => {
   const resultadoXp = await processarResposta(userId, avaliacao.nota);
   const resultadoStreak = await registrarRespostaStreak(userId);
   const conquistas = await verificarConquistas(userId);
-  const missoesCompletadas = await progredirMissoesDiarias(userId, avaliacao.nota);
+  const missoesCompletadas = await progredirMissoesDiarias(userId, avaliacao.nota, 'NATIVO');
 
   res.status(201).json({
     resposta,

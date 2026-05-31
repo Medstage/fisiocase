@@ -244,8 +244,10 @@ model Conquista {
 }
 
 model UserConquista {
-  id         String   @id @default(cuid())
-  unlockedAt DateTime @default(now())
+  id           String    @id @default(cuid())
+  unlockedAt   DateTime  @default(now())
+  // null = aluno ainda não viu o modal; preenchido = modal já foi exibido (não mostrar de novo)
+  notificadoEm DateTime?
 
   userId      String
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)

@@ -85,4 +85,5 @@ export interface Conquista {
   xpRecompensa: number;
   desbloqueada?: boolean;
   unlockedAt?: string | null;
+  notificadoEm?: string | null;
 }

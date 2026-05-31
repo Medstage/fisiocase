@@ -8,5 +8,6 @@ router.use(authenticate);
 
 router.get('/', conquistasController.listar);
 router.get('/usuario', conquistasController.doUsuario);
+router.patch('/:id/notificar', conquistasController.marcarNotificada);
 
 export default router;

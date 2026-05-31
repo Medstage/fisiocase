@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { Loader2, Bold, List, Timer as TimerIcon, Pause, Play } from 'lucide-react';
 import { api } from '@/lib/api';
@@ -28,6 +28,7 @@ function fmt(s: number) {
 export default function CasoPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const qc = useQueryClient();
   const [conteudo, setConteudo] = useState('');
   const taRef = useRef<HTMLTextAreaElement>(null);
   const timer = useTimer(15);
@@ -56,6 +57,15 @@ export default function CasoPage() {
       } catch {
         /* ignore */
       }
+      // Bug 2: força revalidação imediata em todos os componentes que mostram esses dados.
+      qc.invalidateQueries({ queryKey: ['missoes-diarias'] });
+      qc.invalidateQueries({ queryKey: ['notificacoes'] });
+      qc.invalidateQueries({ queryKey: ['conquistas'] });
+      qc.invalidateQueries({ queryKey: ['rank-conquistas'] });
+      qc.invalidateQueries({ queryKey: ['rank-global'] });
+      qc.invalidateQueries({ queryKey: ['rank-semanal'] });
+      qc.invalidateQueries({ queryKey: ['rank-posicao'] });
+      qc.invalidateQueries({ queryKey: ['streak'] });
       router.push(`/feedback/${data.resposta.id}`);
     },
   });

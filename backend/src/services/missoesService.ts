@@ -1,22 +1,69 @@
 import { prisma } from '../lib/prisma';
 import type { Missao } from '@prisma/client';
 
+export type OrigemMissao = 'NATIVO' | 'TURMA';
+
+/**
+ * Início do dia atual no fuso America/Sao_Paulo (00:00 SP),
+ * retornado como Date UTC equivalente.
+ * Sem isso, em Railway (UTC), uma resposta às 22h SP cairia "no dia seguinte".
+ */
+function inicioDoDiaSP(): Date {
+  const agora = new Date();
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Sao_Paulo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(agora);
+  const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
+  // 00:00 SP = 03:00 UTC do mesmo dia (SP é UTC-3, sem horário de verão).
+  return new Date(
+    Date.UTC(Number(map.year), Number(map.month) - 1, Number(map.day), 3, 0, 0, 0),
+  );
+}
+
+/**
+ * Conta o total de casos resolvidos pelo aluno HOJE (SP), de qualquer origem:
+ *   - Respostas nativas (Resposta) com createdAt >= início do dia SP
+ *   - Tarefas de turma (RespostaTurma) com createdAt >= início do dia SP
+ * É a métrica usada pelo tipo `resolver_casos` das missões diárias.
+ */
+async function totalCasosHojeSomadas(userId: string, inicioDia: Date): Promise<number> {
+  const [nativas, deTurma] = await Promise.all([
+    prisma.resposta.count({ where: { userId, createdAt: { gte: inicioDia } } }),
+    prisma.respostaTurma.count({ where: { alunoId: userId, createdAt: { gte: inicioDia } } }),
+  ]);
+  return nativas + deTurma;
+}
+
 /**
  * Avalia as missões diárias do usuário após uma resposta e marca as completadas.
- * Tipos suportados:
- *  - `resolver_casos`: progresso = nº de respostas do usuário HOJE; completa quando >= meta.
- *  - `media_acima`: completa quando a nota atual >= meta (meta = 0..100).
  *
- * Credita o xpRecompensa da missão ao usuário quando completa pela primeira vez.
- * Retorna as missões recém-completadas (para o feedback exibir).
+ * Tipos suportados:
+ *  - `resolver_casos`: progresso = total de respostas do usuário HOJE (qualquer origem)
+ *  - `media_acima`: completa quando a nota recém-obtida >= meta (0..100)
+ *
+ * Credita o xpRecompensa quando completa pela primeira vez.
+ * É **agnóstico à origem da resposta** (nativa ou de turma) — o parâmetro `origem`
+ * existe apenas para fins de log.
+ *
+ * Retorna as missões recém-completadas.
  */
-export async function progredirMissoesDiarias(userId: string, nota: number | null): Promise<Missao[]> {
-  const inicioDia = new Date();
-  inicioDia.setHours(0, 0, 0, 0);
+export async function progredirMissoesDiarias(
+  userId: string,
+  nota: number | null,
+  origem: OrigemMissao = 'NATIVO',
+): Promise<Missao[]> {
+  // eslint-disable-next-line no-console
+  console.log(
+    `[MissaoService] Incrementando progresso para userId=${userId} origem=${origem} nota=${nota}`,
+  );
 
+  const inicioDia = inicioDoDiaSP();
   const [missoes, casosHoje] = await Promise.all([
     prisma.missao.findMany(),
-    prisma.resposta.count({ where: { userId, createdAt: { gte: inicioDia } } }),
+    totalCasosHojeSomadas(userId, inicioDia),
   ]);
 
   const recemCompletadas: Missao[] = [];
@@ -26,9 +73,8 @@ export async function progredirMissoesDiarias(userId: string, nota: number | nul
       where: { userId_missaoId: { userId, missaoId: m.id } },
     });
 
-    // Se já foi completada antes, mantém o progresso atual e segue (sem creditar XP de novo).
+    // Já completada antes: mantém o progresso atualizado (visual) mas não credita XP de novo.
     if (um?.completedAt) {
-      // Ainda assim mantém o progresso atualizado para `resolver_casos` (apenas visual).
       if (m.tipo === 'resolver_casos' && um.progresso !== casosHoje) {
         await prisma.userMissao.update({
           where: { userId_missaoId: { userId, missaoId: m.id } },
@@ -73,6 +119,10 @@ export async function progredirMissoesDiarias(userId: string, nota: number | nul
           xpAtual: { increment: m.xpRecompensa },
         },
       });
+      // eslint-disable-next-line no-console
+      console.log(
+        `[MissaoService] Missão "${m.titulo}" completada por userId=${userId} origem=${origem} +${m.xpRecompensa}XP`,
+      );
       recemCompletadas.push(m);
     }
   }

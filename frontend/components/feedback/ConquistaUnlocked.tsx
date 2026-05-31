@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useQueryClient } from '@tanstack/react-query';
+import { api } from '@/lib/api';
 import { conquistaIcone } from '@/lib/conquistas';
 
 interface ConquistaLite {
@@ -14,14 +16,36 @@ interface ConquistaLite {
 
 export function ConquistaUnlocked({ conquistas, onClose }: { conquistas: ConquistaLite[]; onClose?: () => void }) {
   const [idx, setIdx] = useState(0);
+  const queryClient = useQueryClient();
+  const notificadosRef = useRef<Set<string>>(new Set());
+
+  // Marca a conquista como notificada no backend assim que entra na tela.
+  // Idempotente: se já tem notificadoEm, o backend ignora.
+  useEffect(() => {
+    const atual = conquistas[idx];
+    if (!atual || notificadosRef.current.has(atual.id)) return;
+    notificadosRef.current.add(atual.id);
+    api
+      .patch(`/api/conquistas/${atual.id}/notificar`)
+      .catch(() => {
+        /* falha aqui não bloqueia UI; usuário ainda pode avançar */
+      });
+  }, [idx, conquistas]);
+
   if (!conquistas || conquistas.length === 0) return null;
 
   const atual = conquistas[idx];
   const { Icon, cor } = conquistaIcone(atual.icone);
 
   function avancar() {
-    if (idx < conquistas.length - 1) setIdx((i) => i + 1);
-    else onClose?.();
+    if (idx < conquistas.length - 1) {
+      setIdx((i) => i + 1);
+    } else {
+      // Após todas as conquistas vistas: invalida cache pra refletir notificadoEm.
+      queryClient.invalidateQueries({ queryKey: ['conquistas'] });
+      queryClient.invalidateQueries({ queryKey: ['rank-conquistas'] });
+      onClose?.();
+    }
   }
 
   return (

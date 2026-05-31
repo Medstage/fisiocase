@@ -5,6 +5,7 @@ import { notaParaXp } from '../services/turmaService';
 import { calcularNivel } from '../services/xpService';
 import { registrarRespostaStreak } from '../services/streakService';
 import { verificarConquistas } from '../services/conquistaService';
+import { progredirMissoesDiarias } from '../services/missoesService';
 import { notificar, notificarMembrosTurma, notificarProfessorDaTurma } from '../services/notificacaoService';
 
 async function exigirProfessor(turmaId: string, userId: string, role: string): Promise<string | null> {
@@ -323,9 +324,15 @@ export const corrigir: RequestHandler = async (req, res) => {
     await prisma.user.update({ where: { id: resposta.alunoId }, data: { nivel: novoNivel } });
   }
 
-  // Streak + conquistas
+  // Streak + conquistas + missões diárias (Bug 4)
+  // A correção de turma deve contar como "caso resolvido" exatamente igual
+  // a uma resposta nativa — tudo passa pelos mesmos serviços.
   await registrarRespostaStreak(resposta.alunoId);
   await verificarConquistas(resposta.alunoId);
+  // Nota professor é 0..10; converte para 0..100 para alinhar com a escala da IA
+  // (que é o que missao.media_acima espera).
+  const notaCemBase = nota * 10;
+  await progredirMissoesDiarias(resposta.alunoId, notaCemBase, 'TURMA');
 
   // Notifica aluno
   await notificar(
