@@ -1,0 +1,293 @@
+// FisioCase — Prisma schema (PostgreSQL)
+// Plataforma de casos clínicos de fisioterapia com IA.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ───────────────────────── Enums ─────────────────────────
+enum Role {
+  USER
+  PROFESSOR
+  ADMIN
+}
+
+enum OrigemResposta {
+  IA
+  TURMA
+  LIVRE
+}
+
+enum StatusCasoTurma {
+  RASCUNHO
+  PUBLICADO
+  ENCERRADO
+}
+
+enum StatusRespostaTurma {
+  PENDENTE
+  CORRIGIDO
+}
+
+enum Area {
+  ORTOPEDIA
+  NEUROLOGIA
+  CARDIORRESPIRATORIA
+  ESPORTIVA
+  GERONTOLOGIA
+  PEDIATRIA
+  UROGINECOLOGIA
+  REUMATOLOGIA
+}
+
+enum Dificuldade {
+  FACIL
+  MEDIO
+  DIFICIL
+}
+
+enum TipoPaciente {
+  ADULTO
+  IDOSO
+  PEDIATRICO
+  GESTANTE
+  ATLETA
+}
+
+enum FocoClinico {
+  AVALIACAO
+  DIAGNOSTICO
+  CONDUTA
+  REABILITACAO
+  PREVENCAO
+}
+
+enum StatusCaso {
+  RASCUNHO
+  PUBLICADO
+}
+
+// ───────────────────────── Models ─────────────────────────
+model User {
+  id             String   @id @default(cuid())
+  nome           String
+  email          String   @unique
+  senha          String
+  instituicao    String?
+  semestre       Int?
+  bio            String?  @db.Text
+  avatarUrl      String?
+  role           Role     @default(USER)
+  nivel          String   @default("Iniciante")
+  xpTotal        Int      @default(0)
+  xpAtual        Int      @default(0)
+  sequenciaAtual     Int       @default(0)
+  maiorSequencia     Int       @default(0)
+  ultimoAcessoStreak DateTime?
+  protetoresStreak   Int       @default(0)
+  bloqueado          Boolean   @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  codigoInstitucional String?
+
+  respostas         Resposta[]
+  casosCriados      Caso[]          @relation("CasoAutor")
+  conquistas        UserConquista[]
+  missoes           UserMissao[]
+  notificacoes      Notificacao[]
+  turmasComoProfessor Turma[]       @relation("TurmaProfessor")
+  turmasComoMembro    TurmaMembro[]
+  casosTurmaCriados   CasoTurma[]   @relation("CasoTurmaProfessor")
+  respostasTurma      RespostaTurma[]
+}
+
+model Caso {
+  id                   String       @id @default(cuid())
+  titulo               String
+  area                 Area
+  dificuldade          Dificuldade
+  tipoPaciente         TipoPaciente
+  focoClinico          FocoClinico
+  identificacao        Json // { nome, idade, sexo, profissao, estadoCivil }
+  queixaPrincipal      String       @db.Text
+  historiaDoencaAtual  String       @db.Text
+  historicoPatologico  Json // string[]
+  exameFisico          Json // { pa, fc, fr, spo2, achados }
+  examesComplementares Json // [{ tipo, resultado }]
+  respostaEsperada     String       @db.Text
+  criteriosAvaliacao   Json
+  xpRecompensa         Int          @default(160)
+  status               StatusCaso   @default(RASCUNHO)
+  totalResolucoes      Int          @default(0)
+  mediaAcerto          Float        @default(0)
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  autorId    String?
+  autor      User?       @relation("CasoAutor", fields: [autorId], references: [id], onDelete: SetNull)
+  respostas  Resposta[]
+  casosTurma CasoTurma[] @relation("CasoTurmaCaso")
+
+  @@index([area, dificuldade, status])
+}
+
+model Resposta {
+  id         String          @id @default(cuid())
+  conteudo   String          @db.Text
+  nota       Int?
+  feedback   Json? // { acertos[], melhorias[], explicacaoClinica, recursosEstudo[] }
+  tempoGasto Int             @default(0) // segundos
+  xpGanho    Int             @default(0)
+  origem     OrigemResposta  @default(IA)
+  createdAt  DateTime        @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  casoId String
+  caso   Caso   @relation(fields: [casoId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([casoId])
+}
+
+// ───────────────────────── Sistema de Turmas ─────────────────────────
+
+model Turma {
+  id          String    @id @default(cuid())
+  nome        String
+  descricao   String?   @db.Text
+  codigo      String    @unique
+  ativa       Boolean   @default(true)
+  deletadaEm  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  professorId String
+  professor   User   @relation("TurmaProfessor", fields: [professorId], references: [id], onDelete: Cascade)
+
+  membros TurmaMembro[]
+  casos   CasoTurma[]
+
+  @@index([professorId])
+  @@index([codigo])
+}
+
+model TurmaMembro {
+  id        String   @id @default(cuid())
+  entradaEm DateTime @default(now())
+
+  turmaId String
+  turma   Turma  @relation(fields: [turmaId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([turmaId, userId])
+  @@index([userId])
+}
+
+model CasoTurma {
+  id          String          @id @default(cuid())
+  titulo      String
+  descricao   String?         @db.Text
+  prazo       DateTime?
+  status      StatusCasoTurma @default(RASCUNHO)
+  publicadoEm DateTime?
+  createdAt   DateTime        @default(now())
+
+  turmaId     String
+  turma       Turma  @relation(fields: [turmaId], references: [id], onDelete: Cascade)
+  casoId      String
+  caso        Caso   @relation("CasoTurmaCaso", fields: [casoId], references: [id], onDelete: Cascade)
+  professorId String
+  professor   User   @relation("CasoTurmaProfessor", fields: [professorId], references: [id], onDelete: Cascade)
+
+  respostas RespostaTurma[]
+
+  @@index([turmaId])
+  @@index([casoId])
+}
+
+model RespostaTurma {
+  id                 String              @id @default(cuid())
+  conteudo           String              @db.Text
+  status             StatusRespostaTurma @default(PENDENTE)
+  notaProfessor      Float?
+  feedbackProfessor  String?             @db.Text
+  xpGanho            Int?
+  corrigidoEm        DateTime?
+  createdAt          DateTime            @default(now())
+
+  casoTurmaId String
+  casoTurma   CasoTurma @relation(fields: [casoTurmaId], references: [id], onDelete: Cascade)
+  alunoId     String
+  aluno       User      @relation(fields: [alunoId], references: [id], onDelete: Cascade)
+
+  @@index([casoTurmaId])
+  @@index([alunoId])
+}
+
+model Conquista {
+  id           String @id @default(cuid())
+  titulo       String
+  descricao    String
+  icone        String
+  xpRecompensa Int    @default(0)
+  requisito    Json // { tipo, meta, area?, mediaMinima? }
+
+  usuarios UserConquista[]
+}
+
+model UserConquista {
+  id         String   @id @default(cuid())
+  unlockedAt DateTime @default(now())
+
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conquistaId String
+  conquista   Conquista @relation(fields: [conquistaId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, conquistaId])
+}
+
+model Missao {
+  id           String @id @default(cuid())
+  titulo       String
+  descricao    String
+  xpRecompensa Int    @default(0)
+  tipo         String // ex: "resolver_casos", "media_acima"
+  meta         Int    @default(1)
+
+  usuarios UserMissao[]
+}
+
+model UserMissao {
+  id          String    @id @default(cuid())
+  progresso   Int       @default(0)
+  completedAt DateTime?
+
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  missaoId String
+  missao   Missao @relation(fields: [missaoId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, missaoId])
+}
+
+model Notificacao {
+  id        String   @id @default(cuid())
+  titulo    String
+  descricao String   @db.Text
+  lida      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
