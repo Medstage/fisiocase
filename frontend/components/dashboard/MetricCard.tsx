@@ -19,7 +19,7 @@ interface Props {
 export function MetricCard({ label, value, icon: Icon, iconColor = 'text-neutral-600', prefix, suffix, progress, hint, format = true }: Props) {
   return (
     <motion.div
-      whileHover={{ borderColor: '#0F4D0F', y: -2 }}
+      whileHover={{ borderColor: 'hsl(var(--primary))', y: -2 }}
       transition={{ duration: 0.2 }}
       className="border border-border rounded p-6 bg-card"
     >

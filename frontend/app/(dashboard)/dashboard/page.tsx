@@ -68,7 +68,7 @@ export default function DashboardPage() {
         <MetricCard label="Total XP" value={xpTotal} icon={Zap} iconColor="text-amber-500" />
         {/* Nível (card custom — nome + progresso) */}
         <motion.div
-          whileHover={{ borderColor: '#0F4D0F', y: -2 }}
+          whileHover={{ borderColor: 'hsl(var(--primary))', y: -2 }}
           transition={{ duration: 0.2 }}
           className="border border-border rounded p-6 bg-card"
         >

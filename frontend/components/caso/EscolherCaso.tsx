@@ -135,7 +135,7 @@ export function EscolherCaso() {
               key={c.id}
               type="button"
               onClick={() => setConfirmar(c)}
-              whileHover={{ borderColor: '#0F4D0F', y: -2 }}
+              whileHover={{ borderColor: 'hsl(var(--primary))', y: -2 }}
               transition={{ duration: 0.2 }}
               className="border border-border rounded p-4 bg-card text-left flex flex-col gap-3"
             >

@@ -25,7 +25,7 @@ export function HistoricoItem({ resposta }: { resposta: Resposta }) {
   return (
     <Link href={`/feedback/${resposta.id}`} className="block">
       <motion.div
-        whileHover={{ borderColor: '#0F4D0F', y: -2 }}
+        whileHover={{ borderColor: 'hsl(var(--primary))', y: -2 }}
         transition={{ duration: 0.2 }}
         className="border border-border rounded p-4 bg-card flex items-center justify-between gap-4"
       >

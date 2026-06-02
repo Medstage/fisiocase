@@ -1,6 +1,7 @@
 'use client';
 
 import { BarChart, Bar, XAxis, YAxis, LabelList, ResponsiveContainer } from 'recharts';
+import { useTheme } from 'next-themes';
 import { AREA_LABEL } from '@/lib/constants';
 import type { Area } from '@/types';
 
@@ -11,6 +12,11 @@ interface Item {
 
 /** Barras horizontais (layout vertical) com os casos resolvidos por área. */
 export function GraficoDesempenho({ dados }: { dados: Item[] }) {
+  const { resolvedTheme } = useTheme();
+  const dark = resolvedTheme === 'dark';
+  const txt = dark ? '#F5F5F5' : '#0F0F0F';
+  const bar = dark ? '#2DD867' : '#1B5E2C';
+
   const data = dados.map((d) => ({ area: AREA_LABEL[d.area] ?? d.area, total: d.total }));
 
   if (data.length === 0) {
@@ -34,10 +40,10 @@ export function GraficoDesempenho({ dados }: { dados: Item[] }) {
               width={120}
               tickLine={false}
               axisLine={false}
-              tick={{ fontSize: 12, fill: '#000000' }}
+              tick={{ fontSize: 12, fill: txt }}
             />
-            <Bar dataKey="total" fill="#000000" radius={[0, 4, 4, 0]} barSize={20}>
-              <LabelList dataKey="total" position="right" style={{ fontSize: 12, fill: '#000000', fontWeight: 700 }} />
+            <Bar dataKey="total" fill={bar} radius={[0, 4, 4, 0]} barSize={20}>
+              <LabelList dataKey="total" position="right" style={{ fontSize: 12, fill: txt, fontWeight: 700 }} />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

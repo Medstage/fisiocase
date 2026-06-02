@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { CheckCircle2, Star, Flame, BarChart3, Pencil, Loader2 } from 'lucide-react';
 import { api } from '@/lib/api';
@@ -21,9 +22,33 @@ interface Estatisticas {
   mediaGeral: number;
 }
 
+/** Gráfico de evolução: cores dependem do tema (claro/escuro) para legibilidade. */
+function GraficoEvolucao({ data }: { data: { semana: string; xp: number }[] }) {
+  const { resolvedTheme } = useTheme();
+  const dark = resolvedTheme === 'dark';
+  const axis = dark ? '#A3A3A3' : '#525252';
+  const stroke = dark ? '#F5F5F5' : '#0F0F0F';
+  const accent = dark ? '#2DD867' : '#1B5E2C';
+  const tooltipBg = dark ? '#1A1A1A' : '#FFFFFF';
+  const tooltipBorder = dark ? '#2E2E2E' : '#DAE1D6';
+
+  return (
+    <ResponsiveContainer width="100%" height={220}>
+      <LineChart data={data} margin={{ top: 10, right: 10, left: -18, bottom: 0 }}>
+        <XAxis dataKey="semana" tick={{ fontSize: 11, fill: axis }} axisLine={{ stroke: axis }} tickLine={false} />
+        <YAxis tick={{ fontSize: 11, fill: axis }} axisLine={{ stroke: axis }} tickLine={false} width={40} />
+        <Tooltip
+          contentStyle={{ background: tooltipBg, border: `1px solid ${tooltipBorder}`, borderRadius: 4, fontSize: 12, color: stroke }}
+        />
+        <Line type="monotone" dataKey="xp" stroke={stroke} strokeWidth={2} dot={{ r: 3, fill: accent, stroke: accent }} />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}
+
 function StatCard({ label, icon: Icon, iconColor = 'text-foreground', children }: { label: string; icon: typeof Star; iconColor?: string; children: React.ReactNode }) {
   return (
-    <motion.div whileHover={{ borderColor: '#0F4D0F', y: -2 }} transition={{ duration: 0.2 }} className="border border-border rounded p-6 min-h-[120px] flex flex-col justify-between">
+    <motion.div whileHover={{ borderColor: 'hsl(var(--primary))', y: -2 }} transition={{ duration: 0.2 }} className="border border-border rounded p-6 min-h-[120px] flex flex-col justify-between">
       <div className="flex justify-between items-start">
         <span className="text-xs font-bold uppercase tracking-wider text-neutral-600">{label}</span>
         <Icon className={`h-4 w-4 ${iconColor}`} />
@@ -132,14 +157,7 @@ export default function PerfilPage() {
           {evolucao.length === 0 ? (
             <p className="text-sm text-neutral-500">Sem dados ainda.</p>
           ) : (
-            <ResponsiveContainer width="100%" height={220}>
-              <LineChart data={evolucao} margin={{ top: 10, right: 10, left: -18, bottom: 0 }}>
-                <XAxis dataKey="semana" tick={{ fontSize: 11 }} axisLine={{ stroke: '#000' }} tickLine={false} />
-                <YAxis tick={{ fontSize: 11 }} axisLine={{ stroke: '#000' }} tickLine={false} width={40} />
-                <Tooltip contentStyle={{ border: '1px solid #000', borderRadius: 4, fontSize: 12 }} />
-                <Line type="monotone" dataKey="xp" stroke="#000000" strokeWidth={2} dot={{ r: 3, fill: '#0F4D0F', stroke: '#0F4D0F' }} />
-              </LineChart>
-            </ResponsiveContainer>
+            <GraficoEvolucao data={evolucao} />
           )}
         </div>
       </section>

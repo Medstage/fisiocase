@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 import { Users, FileText, MessageSquare, Star, CalendarDays, Loader2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid } from 'recharts';
 import { api } from '@/lib/api';
@@ -23,7 +24,20 @@ interface Analytics {
 
 export default function AnalyticsPage() {
   const { data: session } = useSession();
+  const { resolvedTheme } = useTheme();
+  const dark = resolvedTheme === 'dark';
   const habilitado = (session as { usuario?: Usuario } | null)?.usuario?.role === 'ADMIN';
+
+  // Cores do gráfico calculadas dinamicamente conforme o tema atual.
+  const c = {
+    grid: dark ? '#2E2E2E' : '#E5E5E5',
+    axis: dark ? '#A3A3A3' : '#525252',
+    stroke: dark ? '#F5F5F5' : '#0F0F0F',
+    bar: dark ? '#2DD867' : '#1B5E2C',
+    cursor: dark ? '#1A1A1A' : '#F5F5F5',
+    tipBg: dark ? '#1A1A1A' : '#FFFFFF',
+    tipBorder: dark ? '#2E2E2E' : '#DAE1D6',
+  };
 
   const { data, isLoading } = useQuery({
     queryKey: ['admin-analytics'],
@@ -71,22 +85,22 @@ export default function AnalyticsPage() {
                   <div className="h-72 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={grafico} margin={{ top: 8, right: 8, bottom: 8, left: -16 }}>
-                        <CartesianGrid stroke="#e5e5e5" vertical={false} />
+                        <CartesianGrid stroke={c.grid} vertical={false} />
                         <XAxis
                           dataKey="area"
-                          tick={{ fontSize: 11, fill: '#525252' }}
+                          tick={{ fontSize: 11, fill: c.axis }}
                           interval={0}
                           angle={-20}
                           textAnchor="end"
                           height={60}
-                          stroke="#000"
+                          stroke={c.axis}
                         />
-                        <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#525252' }} stroke="#000" />
+                        <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: c.axis }} stroke={c.axis} />
                         <Tooltip
-                          cursor={{ fill: '#f5f5f5' }}
-                          contentStyle={{ border: '1px solid #000', borderRadius: 4, fontSize: 12 }}
+                          cursor={{ fill: c.cursor }}
+                          contentStyle={{ background: c.tipBg, border: `1px solid ${c.tipBorder}`, borderRadius: 4, fontSize: 12, color: c.stroke }}
                         />
-                        <Bar dataKey="total" fill="#000" radius={[2, 2, 0, 0]} />
+                        <Bar dataKey="total" fill={c.bar} radius={[2, 2, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
