@@ -65,7 +65,7 @@ export default function DashboardPage() {
           protetoresStreak={streak?.protetoresStreak ?? 0}
           resolveuHoje={streak?.resolveuHoje ?? false}
         />
-        <MetricCard label="Total XP" value={xpTotal} icon={Zap} iconColor="text-warning" />
+        <MetricCard label="Total XP" value={xpTotal} icon={Zap} iconColor="text-amber-500" />
         {/* Nível (card custom — nome + progresso) */}
         <motion.div
           whileHover={{ borderColor: '#0F4D0F', y: -2 }}
@@ -74,7 +74,7 @@ export default function DashboardPage() {
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs uppercase tracking-wider text-neutral-600">Nível</span>
-            <TrendingUp className="h-4 w-4 text-neutral-600" />
+            <TrendingUp className="h-4 w-4 text-sky-500" />
           </div>
           <div className="text-2xl font-bold">{prog.nivel}</div>
           <div className="mt-3 h-2 border border-border rounded overflow-hidden">
@@ -89,7 +89,7 @@ export default function DashboardPage() {
             {prog.proximo ? `Faltam ${prog.faltam.toLocaleString('pt-BR')} XP para ${prog.proximo}` : 'Nível máximo!'}
           </p>
         </motion.div>
-        <MetricCard label="Ranking geral" value={posicao?.posicao ?? 0} prefix="#" icon={Trophy} iconColor="text-warning" format={false} />
+        <MetricCard label="Ranking geral" value={posicao?.posicao ?? 0} prefix="#" icon={Trophy} iconColor="text-yellow-500" format={false} />
       </div>
 
       {/* CTA */}

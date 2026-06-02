@@ -13,12 +13,12 @@
     --popover: 0 0% 100%;
     --popover-foreground: 124 30% 12%;
 
-    /* Verde fisio: brand */
-    --primary: 120 67% 18%;            /* #0F4D0F verde escuro */
+    /* Verde fisio: brand (mais vibrante que o #0F4D0F original, mantém a seriedade) */
+    --primary: 142 55% 24%;            /* #1B5E2C verde-floresta */
     --primary-foreground: 0 0% 100%;
 
-    /* Verde vivo: acentos / badges desbloqueadas */
-    --brand: 122 39% 49%;              /* #4CAF50 verde-vivo */
+    /* Verde vivo: acentos / badges desbloqueadas / hover do primary */
+    --brand: 142 65% 42%;              /* #25A94E verde-vivo */
     --brand-foreground: 0 0% 100%;
 
     /* Superfícies secundárias */
@@ -55,11 +55,11 @@
     --popover: 130 20% 11%;
     --popover-foreground: 90 8% 92%;
 
-    --primary: 122 39% 56%;            /* #66BB6A verde vibrante (mais visível no escuro) */
-    --primary-foreground: 124 60% 8%;
+    --primary: 142 60% 55%;            /* #4ED474 verde vibrante (mais visível no escuro) */
+    --primary-foreground: 142 60% 8%;
 
-    --brand: 122 50% 65%;              /* #7BD17F */
-    --brand-foreground: 124 60% 8%;
+    --brand: 142 65% 65%;               /* #6FE190 verde-claro neon */
+    --brand-foreground: 142 60% 8%;
 
     --secondary: 130 15% 16%;          /* #232E22 */
     --secondary-foreground: 90 8% 92%;

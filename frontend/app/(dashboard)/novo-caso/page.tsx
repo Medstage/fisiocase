@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { AREA_LABEL, TIPO_PACIENTE_LABEL, FOCO_LABEL } from '@/lib/constants';
 import { EscolherCaso } from '@/components/caso/EscolherCaso';
+import { CasoLoader } from '@/components/caso/CasoLoader';
 import type { Area, Dificuldade, TipoPaciente, FocoClinico, Caso } from '@/types';
 
 const AREAS = Object.entries(AREA_LABEL) as [Area, string][];
@@ -47,22 +48,8 @@ function Chip({ selected, onClick, children, full }: { selected: boolean; onClic
   );
 }
 
-function LoaderView() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-[380px] border border-border rounded p-12">
-      <h3 className="text-2xl font-bold text-center mb-8">Sintetizando dados clínicos...</h3>
-      <div className="w-full max-w-[400px] space-y-4">
-        <div className="h-6 border border-border rounded animate-pulse" />
-        <div className="h-3 w-3/4 border border-border rounded animate-pulse" style={{ animationDelay: '0.15s' }} />
-        <div className="h-3 w-5/6 border border-border rounded animate-pulse" style={{ animationDelay: '0.3s' }} />
-        <div className="flex gap-4 pt-4">
-          <div className="h-10 w-1/2 border border-border rounded animate-pulse" style={{ animationDelay: '0.1s' }} />
-          <div className="h-10 w-1/2 border border-border rounded animate-pulse" style={{ animationDelay: '0.25s' }} />
-        </div>
-      </div>
-    </div>
-  );
-}
+// Loader migrado para components/caso/CasoLoader.tsx — mostra etapas animadas
+// (anamnese, exame físico, exames, conduta) durante a geração pela IA.
 
 function WizardIA() {
   const router = useRouter();
@@ -89,7 +76,7 @@ function WizardIA() {
   const valorAtual = [area, tipoPaciente, dificuldade, focoClinico][step];
   const Icon = PASSOS[step].icon;
 
-  if (gerar.isPending) return <LoaderView />;
+  if (gerar.isPending) return <CasoLoader />;
 
   return (
     <div>

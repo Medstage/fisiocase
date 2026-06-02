@@ -7,7 +7,6 @@ import { Loader2, Plus, X, UserMinus, Search } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { FloatingInput } from '@/components/ui/floating-input';
-import { AdminNav } from '@/components/admin/AdminNav';
 import { AdminGuard } from '@/components/admin/AdminGuard';
 
 interface Professor {
@@ -54,7 +53,6 @@ export default function AdminProfessoresPage() {
 
   return (
     <AdminGuard>
-      <AdminNav />
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Gerenciar professores</h1>
         <Button onClick={() => { setModoModal('promover'); setModalAberto(true); }} className="gap-2">
