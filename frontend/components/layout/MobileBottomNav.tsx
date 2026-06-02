@@ -29,7 +29,7 @@ export function MobileBottomNav({ usuario }: { usuario?: Partial<Usuario> }) {
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-black flex z-30"
+      className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-card border-t border-border flex z-30"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       aria-label="Navegação principal"
     >
@@ -41,7 +41,7 @@ export function MobileBottomNav({ usuario }: { usuario?: Partial<Usuario> }) {
             href={href}
             className={cn(
               'flex-1 flex flex-col items-center justify-center gap-0.5 transition-colors',
-              ativo ? 'bg-black text-white' : 'text-black hover:bg-neutral-100',
+              ativo ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-accent',
             )}
           >
             <Icon className="h-5 w-5" />

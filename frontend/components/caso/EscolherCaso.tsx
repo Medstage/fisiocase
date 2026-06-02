@@ -13,15 +13,15 @@ import { AREA_LABEL, DIFICULDADE_LABEL, TIPO_PACIENTE_LABEL, FOCO_LABEL } from '
 import type { Area, Dificuldade, TipoPaciente, FocoClinico, Caso } from '@/types';
 
 const SELECT_CLS =
-  'appearance-none border border-black rounded pl-3 pr-9 h-10 text-sm bg-white cursor-pointer focus:outline-none focus:border-green transition-colors w-full';
+  'appearance-none border border-border rounded pl-3 pr-9 h-10 text-sm bg-card cursor-pointer focus:outline-none focus:border-brand transition-colors w-full';
 const SELECT_SM_CLS =
-  'appearance-none border border-black rounded pl-3 pr-9 h-9 text-xs font-bold uppercase bg-white cursor-pointer focus:outline-none focus:border-green transition-colors';
+  'appearance-none border border-border rounded pl-3 pr-9 h-9 text-xs font-bold uppercase bg-card cursor-pointer focus:outline-none focus:border-brand transition-colors';
 
 function SelectWrap({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={cn('relative', className)}>
       {children}
-      <ChevronDown className="h-4 w-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-black" />
+      <ChevronDown className="h-4 w-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-foreground" />
     </div>
   );
 }
@@ -66,8 +66,8 @@ export function EscolherCaso() {
   return (
     <div>
       {/* Filtros */}
-      <div className="border border-black rounded p-4 mb-6 flex flex-col gap-3">
-        <div className="flex items-center gap-2 border border-black rounded px-3 h-10">
+      <div className="border border-border rounded p-4 mb-6 flex flex-col gap-3">
+        <div className="flex items-center gap-2 border border-border rounded px-3 h-10">
           <Search className="h-4 w-4 text-neutral-600" />
           <input
             value={busca}
@@ -137,7 +137,7 @@ export function EscolherCaso() {
               onClick={() => setConfirmar(c)}
               whileHover={{ borderColor: '#0F4D0F', y: -2 }}
               transition={{ duration: 0.2 }}
-              className="border border-black rounded p-4 bg-white text-left flex flex-col gap-3"
+              className="border border-border rounded p-4 bg-card text-left flex flex-col gap-3"
             >
               <div className="flex items-start gap-2 flex-wrap">
                 <Badge>{AREA_LABEL[c.area]}</Badge>
@@ -163,20 +163,20 @@ export function EscolherCaso() {
       {confirmar && (
         <div
           onClick={() => setConfirmar(null)}
-          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-foreground/60 flex items-center justify-center p-4"
         >
           <motion.div
             onClick={(e) => e.stopPropagation()}
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white border border-black rounded p-6 max-w-md w-full"
+            className="bg-card border border-border rounded p-6 max-w-md w-full"
           >
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-xs uppercase tracking-widest text-neutral-600">Iniciar caso</p>
                 <h3 className="text-lg font-bold">{confirmar.titulo}</h3>
               </div>
-              <button onClick={() => setConfirmar(null)} className="p-1 border border-black rounded hover:bg-black hover:text-white">
+              <button onClick={() => setConfirmar(null)} className="p-1 border border-border rounded hover:bg-foreground hover:text-background">
                 <X className="h-4 w-4" />
               </button>
             </div>

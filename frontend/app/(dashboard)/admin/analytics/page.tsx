@@ -67,7 +67,7 @@ export default function AnalyticsPage() {
                   Nenhum caso cadastrado.
                 </div>
               ) : (
-                <div className="border border-black rounded bg-white p-6">
+                <div className="border border-border rounded bg-card p-6">
                   <div className="h-72 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={grafico} margin={{ top: 8, right: 8, bottom: 8, left: -16 }}>
@@ -91,7 +91,7 @@ export default function AnalyticsPage() {
                     </ResponsiveContainer>
                   </div>
 
-                  <div className="mt-6 border-t border-black divide-y divide-neutral-200">
+                  <div className="mt-6 border-t border-border divide-y divide-neutral-200">
                     {(data?.casosPorArea ?? []).map((c) => (
                       <div key={c.area} className="flex items-center justify-between py-3 text-sm">
                         <span>{AREA_LABEL[c.area] ?? c.area}</span>
@@ -105,7 +105,7 @@ export default function AnalyticsPage() {
 
             <section>
               <h2 className="text-lg font-bold mb-4">Top usuários (XP)</h2>
-              <div className="border border-black rounded bg-white divide-y divide-black">
+              <div className="border border-border rounded bg-card divide-y divide-black">
                 {(data?.topUsuarios ?? []).length === 0 && (
                   <p className="p-4 text-sm text-neutral-500">Nenhum usuário ainda.</p>
                 )}

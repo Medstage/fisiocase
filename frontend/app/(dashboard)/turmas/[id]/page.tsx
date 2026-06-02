@@ -125,11 +125,11 @@ export default function TurmaDetalhePage() {
       transition={{ duration: 0.2 }}
     >
       {/* Header */}
-      <header className="mb-8 border-b border-black pb-4 flex flex-col sm:flex-row sm:items-start gap-4">
+      <header className="mb-8 border-b border-border pb-4 flex flex-col sm:flex-row sm:items-start gap-4">
         <Link
           href="/turmas"
           aria-label="Voltar para turmas"
-          className="border border-black p-2 hover:bg-black hover:text-white transition-colors rounded shrink-0 w-fit"
+          className="border border-border p-2 hover:bg-foreground hover:text-background transition-colors rounded shrink-0 w-fit"
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>
@@ -138,7 +138,7 @@ export default function TurmaDetalhePage() {
           <p className="text-xs uppercase tracking-widest text-neutral-600">Turma</p>
           <h1 className="text-2xl font-bold">{turma.nome}</h1>
           <div className="flex items-center gap-2 mt-2">
-            <div className="h-7 w-7 shrink-0 rounded-full bg-black text-white flex items-center justify-center font-bold text-xs">
+            <div className="h-7 w-7 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center font-bold text-xs">
               {inicial(turma.professor?.nome)}
             </div>
             <span className="text-sm text-neutral-700">
@@ -157,7 +157,7 @@ export default function TurmaDetalhePage() {
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
-                className="border-destructive text-destructive hover:bg-destructive hover:text-white"
+                className="border-destructive text-destructive hover:bg-destructive hover:text-background"
                 onClick={() => sair.mutate()}
                 disabled={sair.isPending}
               >
@@ -176,7 +176,7 @@ export default function TurmaDetalhePage() {
           ) : (
             <Button
               variant="outline"
-              className="border-destructive text-destructive hover:bg-destructive hover:text-white"
+              className="border-destructive text-destructive hover:bg-destructive hover:text-background"
               onClick={() => setConfirmar(true)}
             >
               <LogOut className="h-4 w-4" /> Sair da turma
@@ -191,7 +191,7 @@ export default function TurmaDetalhePage() {
 
         {casos.length === 0 ? (
           <div className="border border-dashed border-neutral-400 rounded p-10 text-center">
-            <div className="mx-auto mb-4 h-12 w-12 border border-black rounded-full flex items-center justify-center">
+            <div className="mx-auto mb-4 h-12 w-12 border border-border rounded-full flex items-center justify-center">
               <BookOpen className="h-6 w-6" />
             </div>
             <p className="text-sm text-neutral-600 max-w-sm mx-auto">
@@ -211,7 +211,7 @@ export default function TurmaDetalhePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
                   className={cn(
-                    'border border-black rounded p-6 bg-white flex flex-col lg:flex-row lg:items-center gap-4',
+                    'border border-border rounded p-6 bg-card flex flex-col lg:flex-row lg:items-center gap-4',
                     encerrado && 'opacity-50',
                   )}
                 >

@@ -8,7 +8,7 @@ import type { Usuario } from '@/types';
 
 export function DashboardShell({ usuario, children }: { usuario?: Partial<Usuario>; children: ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-white text-black">
+    <div className="flex min-h-screen bg-background text-foreground">
       <Sidebar usuario={usuario} />
       <div className="flex-1 flex flex-col min-w-0">
         <Topbar usuario={usuario} />

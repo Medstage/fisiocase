@@ -28,8 +28,8 @@ export function OptionGroup<T extends string>({
             type="button"
             onClick={() => onChange(o.value)}
             className={cn(
-              'px-4 h-10 rounded border border-black text-sm transition-all active:scale-[0.98]',
-              value === o.value ? 'bg-black text-white' : 'bg-white text-black hover:bg-neutral-100',
+              'px-4 h-10 rounded border border-border text-sm transition-all active:scale-[0.98]',
+              value === o.value ? 'bg-foreground text-background' : 'bg-background text-foreground hover:bg-neutral-100',
             )}
           >
             {o.label}

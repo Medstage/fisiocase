@@ -1,7 +1,8 @@
 import type { Config } from 'tailwindcss';
 
-// Design System do Stitch — "Strict Flat".
-// Verde #0F4D0F, preto, branco. Bordas 1px pretas, sem sombras, raio 4px, Inter.
+// FisioCase — Design system "Clínico equilibrado" (light + dark).
+// Verde fisio como protagonista, com acentos info/warning/success
+// pra dar vida e identidade visual.
 const config: Config = {
   darkMode: ['class'],
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
@@ -20,7 +21,15 @@ const config: Config = {
         accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
         popover: { DEFAULT: 'hsl(var(--popover))', foreground: 'hsl(var(--popover-foreground))' },
         card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' },
-        // Verde do Stitch para uso utilitário direto
+
+        // Tokens semânticos novos
+        brand: { DEFAULT: 'hsl(var(--brand))', foreground: 'hsl(var(--brand-foreground))' },
+        info: { DEFAULT: 'hsl(var(--info))', foreground: 'hsl(var(--info-foreground))' },
+        warning: { DEFAULT: 'hsl(var(--warning))', foreground: 'hsl(var(--warning-foreground))' },
+        success: { DEFAULT: 'hsl(var(--success))', foreground: 'hsl(var(--success-foreground))' },
+
+        // Verde literal (mantido para compatibilidade — substitui usos diretos como bg-green).
+        // Light mode: verde escuro original. Dark mode: já é tratado via .dark .bg-green abaixo.
         green: { DEFAULT: '#0F4D0F', dark: '#003503', light: '#96D788', soft: '#B1F3A2' },
         surface: { DEFAULT: '#F9F9F9', container: '#EEEEEE', high: '#E2E2E2' },
       },

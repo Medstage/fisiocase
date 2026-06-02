@@ -21,7 +21,7 @@ export function CasoViewer({ caso }: { caso: Caso }) {
   return (
     <div className="flex flex-col gap-4">
       {/* Cabeçalho do caso */}
-      <div className="flex flex-col gap-2 pb-4 border-b border-black">
+      <div className="flex flex-col gap-2 pb-4 border-b border-border">
         <span className="text-xs font-bold uppercase tracking-widest text-neutral-600">Caso clínico</span>
         <h1 className="text-2xl font-bold">{caso.titulo}</h1>
         <div className="flex gap-2 flex-wrap">
@@ -42,7 +42,7 @@ export function CasoViewer({ caso }: { caso: Caso }) {
       </Accordion>
 
       <Accordion titulo="Queixa principal">
-        <blockquote className="italic border-l-4 border-black pl-4 py-1 leading-relaxed">
+        <blockquote className="italic border-l-4 border-border pl-4 py-1 leading-relaxed">
           “{caso.queixaPrincipal}”
         </blockquote>
       </Accordion>
@@ -62,14 +62,14 @@ export function CasoViewer({ caso }: { caso: Caso }) {
       )}
 
       <Accordion titulo="Exame físico">
-        <div className="grid grid-cols-2 border border-black rounded overflow-hidden mb-3">
+        <div className="grid grid-cols-2 border border-border rounded overflow-hidden mb-3">
           {VITAIS.map((v, i) => (
             <div
               key={v.k}
               className={cn(
                 'p-3 flex flex-col gap-1',
-                i % 2 === 0 && 'border-r border-black',
-                i < 2 && 'border-b border-black',
+                i % 2 === 0 && 'border-r border-border',
+                i < 2 && 'border-b border-border',
               )}
             >
               <span className="text-xs font-bold text-neutral-600 uppercase">{v.label}</span>

@@ -16,7 +16,7 @@ export function EstatisticasCard({ label, value, icon: Icon, hint }: Props) {
     <motion.div
       whileHover={{ borderColor: '#0F4D0F', y: -2 }}
       transition={{ duration: 0.2 }}
-      className="border border-black rounded p-6 bg-white"
+      className="border border-border rounded p-6 bg-card"
     >
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs uppercase tracking-wider text-neutral-600">{label}</span>

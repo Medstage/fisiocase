@@ -31,10 +31,10 @@ import type { TurmaProfessor } from '@/components/professor/utils';
 // --------- estilos auxiliares ---------
 
 const textareaCls =
-  'w-full border border-black rounded p-4 text-sm bg-white outline-none focus:border-green transition-colors resize-y placeholder:text-neutral-500';
+  'w-full border border-border rounded p-4 text-sm bg-card outline-none focus:border-brand transition-colors resize-y placeholder:text-neutral-500';
 
 const selectCls =
-  'w-full h-12 border border-black rounded px-4 text-sm bg-white outline-none focus:border-green transition-colors appearance-none';
+  'w-full h-12 border border-border rounded px-4 text-sm bg-card outline-none focus:border-brand transition-colors appearance-none';
 
 const labelCls = 'block text-xs uppercase tracking-wider text-neutral-600 mb-2';
 
@@ -87,8 +87,8 @@ function Stepper({
                 <span
                   className={cn(
                     'h-9 w-9 rounded-full border flex items-center justify-center text-sm font-bold transition-colors',
-                    ativo && 'bg-black text-white border-black',
-                    concluido && 'bg-green text-white border-green',
+                    ativo && 'bg-foreground text-background border-border',
+                    concluido && 'bg-green text-background border-green',
                     !ativo && !concluido && 'bg-neutral-100 text-neutral-500 border-neutral-300',
                   )}
                 >
@@ -97,7 +97,7 @@ function Stepper({
                 <span
                   className={cn(
                     'text-[10px] uppercase tracking-wider font-bold whitespace-nowrap',
-                    ativo ? 'text-black' : 'text-neutral-500',
+                    ativo ? 'text-foreground' : 'text-neutral-500',
                   )}
                 >
                   {p.titulo}
@@ -254,7 +254,7 @@ function EtapaConfiguracao() {
             const v = e.target.value;
             s.set('xpRecompensa', v === '' ? null : Number(v));
           }}
-          className="w-full h-12 border border-black rounded px-4 text-sm bg-white outline-none focus:border-green transition-colors"
+          className="w-full h-12 border border-border rounded px-4 text-sm bg-card outline-none focus:border-brand transition-colors"
         />
         {s.dificuldade && (
           <p className="text-xs text-neutral-500 mt-2">
@@ -457,7 +457,7 @@ function EtapaExame() {
               }
             }}
             placeholder="Ex.: Hipertensão arterial sistêmica"
-            className="flex-1 h-11 border border-black rounded px-4 text-sm bg-white outline-none focus:border-green transition-colors"
+            className="flex-1 h-11 border border-border rounded px-4 text-sm bg-card outline-none focus:border-brand transition-colors"
           />
           <Button type="button" variant="outline" size="default" onClick={adicionarHistorico}>
             <Plus className="h-4 w-4" /> Adicionar
@@ -473,14 +473,14 @@ function EtapaExame() {
                 animate={{ opacity: 1, x: 0, height: 'auto' }}
                 exit={{ opacity: 0, x: 8, height: 0 }}
                 transition={{ duration: 0.18 }}
-                className="flex items-center justify-between border border-black rounded px-4 py-2 text-sm bg-white"
+                className="flex items-center justify-between border border-border rounded px-4 py-2 text-sm bg-card"
               >
                 <span>{item}</span>
                 <button
                   type="button"
                   onClick={() => s.removeHistoricoItem(i)}
                   aria-label="Remover"
-                  className="text-neutral-600 hover:text-black"
+                  className="text-neutral-600 hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -697,7 +697,7 @@ function EtapaGabarito() {
           )}
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-black pt-3">
+        <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
           <span className="text-xs uppercase tracking-wider text-neutral-600">
             Total dos pesos
           </span>
@@ -748,7 +748,7 @@ function SecaoRevisao({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border border-black rounded bg-white">
+    <div className="border border-border rounded bg-card">
       <div className="w-full p-4 flex justify-between items-center">
         <button
           type="button"
@@ -761,7 +761,7 @@ function SecaoRevisao({
         <button
           type="button"
           onClick={onEditar}
-          className="ml-4 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-neutral-700 hover:text-black"
+          className="ml-4 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-neutral-700 hover:text-foreground"
         >
           <Pencil className="h-3.5 w-3.5" /> Editar
         </button>
@@ -775,7 +775,7 @@ function SecaoRevisao({
             transition={{ duration: 0.18 }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 pt-3 border-t border-black text-sm">{children}</div>
+            <div className="px-4 pb-4 pt-3 border-t border-border text-sm">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -895,7 +895,7 @@ function EtapaRevisao({ modo }: { modo: 'admin' | 'professor' }) {
       </SecaoRevisao>
 
       {/* Publicação */}
-      <div className="border border-black rounded bg-white p-5 space-y-4">
+      <div className="border border-border rounded bg-card p-5 space-y-4">
         <div>
           <h3 className="text-sm font-bold mb-3">Publicação</h3>
           <div className="flex gap-2">
@@ -903,8 +903,8 @@ function EtapaRevisao({ modo }: { modo: 'admin' | 'professor' }) {
               type="button"
               onClick={() => s.set('publicar', true)}
               className={cn(
-                'flex-1 h-11 rounded border border-black text-sm font-bold transition-colors',
-                s.publicar ? 'bg-black text-white' : 'bg-white hover:bg-neutral-100',
+                'flex-1 h-11 rounded border border-border text-sm font-bold transition-colors',
+                s.publicar ? 'bg-foreground text-background' : 'bg-card hover:bg-neutral-100',
               )}
             >
               Publicar imediatamente
@@ -913,8 +913,8 @@ function EtapaRevisao({ modo }: { modo: 'admin' | 'professor' }) {
               type="button"
               onClick={() => s.set('publicar', false)}
               className={cn(
-                'flex-1 h-11 rounded border border-black text-sm font-bold transition-colors',
-                !s.publicar ? 'bg-black text-white' : 'bg-white hover:bg-neutral-100',
+                'flex-1 h-11 rounded border border-border text-sm font-bold transition-colors',
+                !s.publicar ? 'bg-foreground text-background' : 'bg-card hover:bg-neutral-100',
               )}
             >
               Salvar como rascunho

@@ -37,9 +37,9 @@ export function TabelaRanking({
   }
 
   return (
-    <div className="border border-black rounded overflow-hidden">
+    <div className="border border-border rounded overflow-hidden">
       {/* Cabeçalho */}
-      <div className="flex items-center px-4 h-10 border-b border-black bg-white text-xs uppercase tracking-wider text-neutral-600">
+      <div className="flex items-center px-4 h-10 border-b border-border bg-card text-xs uppercase tracking-wider text-neutral-600">
         <span className="w-10 shrink-0">#</span>
         <span className="flex-1 min-w-0">Estudante</span>
         {mostrarNivel && <span className="hidden sm:block w-28 shrink-0">Nível</span>}
@@ -53,16 +53,16 @@ export function TabelaRanking({
           return (
             <div
               key={it.id}
-              className={cn('flex items-center px-4 py-3 text-sm', sou && 'bg-black text-white')}
+              className={cn('flex items-center px-4 py-3 text-sm', sou && 'bg-foreground text-background')}
             >
-              <span className={cn('w-10 shrink-0 font-bold', sou ? 'text-white' : 'text-neutral-500')}>
+              <span className={cn('w-10 shrink-0 font-bold', sou ? 'text-background' : 'text-neutral-500')}>
                 {it.posicao}
               </span>
               <span className="flex-1 min-w-0 flex items-center gap-3">
                 <span
                   className={cn(
                     'h-8 w-8 shrink-0 rounded-full flex items-center justify-center text-xs font-bold border',
-                    sou ? 'bg-white text-black border-white' : 'bg-black text-white border-black',
+                    sou ? 'bg-background text-foreground border-background' : 'bg-foreground text-background border-border',
                   )}
                 >
                   {inicial(it.nome)}
@@ -72,7 +72,7 @@ export function TabelaRanking({
               {mostrarNivel && (
                 <span className="hidden sm:block w-28 shrink-0">
                   {it.nivel && (
-                    <Badge variant={sou ? 'solid' : 'outline'} className={sou ? 'bg-white text-black' : ''}>
+                    <Badge variant={sou ? 'solid' : 'outline'} className={sou ? 'bg-background text-foreground' : ''}>
                       {it.nivel}
                     </Badge>
                   )}

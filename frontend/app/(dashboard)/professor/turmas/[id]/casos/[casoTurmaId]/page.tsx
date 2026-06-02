@@ -70,7 +70,7 @@ export default function CasoTurmaProfessorPage() {
         ) : (
           <>
             {/* Header do caso */}
-            <div className="border border-black rounded p-6 bg-white mb-6">
+            <div className="border border-border rounded p-6 bg-card mb-6">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div>
                   <p className="text-xs uppercase tracking-widest text-neutral-600 mb-1">Caso da turma</p>
@@ -107,10 +107,10 @@ export default function CasoTurmaProfessorPage() {
                 Nenhum aluno respondeu ainda.
               </div>
             ) : (
-              <div className="border border-black rounded bg-white overflow-x-auto">
+              <div className="border border-border rounded bg-card overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-black text-left text-xs uppercase tracking-wider text-neutral-600">
+                    <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-neutral-600">
                       <th className="p-4 font-bold">Aluno</th>
                       <th className="p-4 font-bold">Status</th>
                       <th className="p-4 font-bold">Submissão</th>
@@ -122,7 +122,7 @@ export default function CasoTurmaProfessorPage() {
                       <tr key={r.id}>
                         <td className="p-4">
                           <div className="flex items-center gap-3">
-                            <div className="h-8 w-8 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold">
+                            <div className="h-8 w-8 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold">
                               {r.aluno.nome.charAt(0).toUpperCase()}
                             </div>
                             <span className="font-bold">{r.aluno.nome}</span>

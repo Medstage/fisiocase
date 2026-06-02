@@ -24,7 +24,7 @@ export function RespostaEditor({
   }, [value]);
 
   return (
-    <div className="border border-black rounded bg-white transition-colors focus-within:border-green">
+    <div className="border border-border rounded bg-card transition-colors focus-within:border-brand">
       <textarea
         ref={ref}
         value={value}

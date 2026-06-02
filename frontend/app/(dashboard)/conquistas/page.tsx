@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Sparkles, Trophy, Target } from 'lucide-react';
 import { api } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { ConquistasGrid } from '@/components/ranking/ConquistasGrid';
@@ -70,8 +70,8 @@ export default function ConquistasPage() {
               type="button"
               onClick={() => setAba(a.id)}
               className={cn(
-                'h-9 px-4 rounded text-xs font-bold uppercase tracking-wider border border-black transition-colors',
-                ativo ? 'bg-black text-white' : 'bg-white text-black hover:bg-neutral-100',
+                'h-9 px-4 rounded text-xs font-bold uppercase tracking-wider border border-border transition-colors',
+                ativo ? 'bg-foreground text-background' : 'bg-background text-foreground hover:bg-neutral-100',
               )}
             >
               {a.label}
@@ -104,12 +104,23 @@ export default function ConquistasPage() {
             transition={{ duration: 0.18 }}
           >
             {visiveis.length === 0 ? (
-              <div className="border border-dashed border-neutral-400 rounded p-10 text-center text-sm text-neutral-500">
-                {aba === 'desbloqueadas'
-                  ? 'Você ainda não desbloqueou nenhuma conquista.'
-                  : aba === 'progresso'
-                    ? 'Todas as conquistas foram desbloqueadas. 🎉'
-                    : 'Nenhuma conquista disponível ainda.'}
+              <div className="border border-dashed border-neutral-400 rounded p-10 text-center text-sm text-neutral-500 flex flex-col items-center gap-3">
+                {aba === 'desbloqueadas' ? (
+                  <>
+                    <Trophy className="h-8 w-8 text-amber-500" />
+                    <span>Você ainda não desbloqueou nenhuma conquista.</span>
+                  </>
+                ) : aba === 'progresso' ? (
+                  <>
+                    <Sparkles className="h-8 w-8 text-amber-400" />
+                    <span>Todas as conquistas foram desbloqueadas.</span>
+                  </>
+                ) : (
+                  <>
+                    <Target className="h-8 w-8 text-muted-foreground" />
+                    <span>Nenhuma conquista disponível ainda.</span>
+                  </>
+                )}
               </div>
             ) : (
               <ConquistasGrid conquistas={visiveis} />

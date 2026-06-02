@@ -92,10 +92,10 @@ export default function CorrecoesUnificadasPage() {
             <p className="text-xs uppercase tracking-wider text-neutral-600 mb-3">
               {pendentes.length} resposta(s) aguardando
             </p>
-            <div className="border border-black rounded bg-white divide-y divide-neutral-200">
+            <div className="border border-border rounded bg-card divide-y divide-neutral-200">
               {pendentes.map((r) => (
                 <div key={r.id} className="p-4 flex flex-wrap items-center gap-4">
-                  <div className="h-9 w-9 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold">
+                  <div className="h-9 w-9 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-bold">
                     {r.aluno.nome.charAt(0).toUpperCase()}
                   </div>
                   <div className="flex-1 min-w-0">

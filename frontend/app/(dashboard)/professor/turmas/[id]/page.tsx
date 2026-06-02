@@ -176,12 +176,12 @@ export default function TurmaDetalhePage() {
       onClick={() => setTab(id)}
       className={cn(
         'px-1 pb-3 text-sm font-bold uppercase tracking-wide border-b-2 transition-colors flex items-center gap-2',
-        tab === id ? 'border-green text-black' : 'border-transparent text-neutral-500 hover:text-black',
+        tab === id ? 'border-green text-foreground' : 'border-transparent text-neutral-500 hover:text-foreground',
       )}
     >
       {label}
       {count !== undefined && count > 0 && (
-        <span className="inline-flex items-center justify-center text-[10px] font-bold h-4 min-w-4 px-1 rounded bg-black text-white">
+        <span className="inline-flex items-center justify-center text-[10px] font-bold h-4 min-w-4 px-1 rounded bg-foreground text-background">
           {count}
         </span>
       )}
@@ -216,14 +216,14 @@ export default function TurmaDetalhePage() {
                 type="button"
                 onClick={copiarCodigo}
                 title="Clique para copiar"
-                className="inline-flex items-center gap-2 rounded bg-black text-white font-bold tracking-widest text-sm px-3 py-2"
+                className="inline-flex items-center gap-2 rounded bg-foreground text-background font-bold tracking-widest text-sm px-3 py-2"
               >
                 Código: {turma.codigo}
                 {codigoCopiado ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
               </button>
             </div>
 
-            <div className="flex gap-6 border-b border-black mb-6 overflow-x-auto">
+            <div className="flex gap-6 border-b border-border mb-6 overflow-x-auto">
               <Aba id="casos" label="Casos" count={casos.length} />
               <Aba id="alunos" label="Alunos" count={turma ? membrosQ.data?.membros.length : undefined} />
               <Aba id="pendentes" label="Correções pendentes" count={respostasPendentes.length} />
@@ -308,10 +308,10 @@ export default function TurmaDetalhePage() {
                     Ainda não há alunos nesta turma.
                   </div>
                 ) : (
-                  <div className="border border-black rounded bg-white overflow-x-auto">
+                  <div className="border border-border rounded bg-card overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-black text-left text-xs uppercase tracking-wider text-neutral-600">
+                        <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-neutral-600">
                           <th className="p-4 font-bold">Aluno</th>
                           <th className="p-4 font-bold">Casos resolvidos</th>
                           <th className="p-4 font-bold">Média de notas</th>
@@ -324,7 +324,7 @@ export default function TurmaDetalhePage() {
                           <tr key={m.id}>
                             <td className="p-4">
                               <div className="flex items-center gap-3">
-                                <div className="h-8 w-8 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold">
+                                <div className="h-8 w-8 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold">
                                   {m.nome.charAt(0).toUpperCase()}
                                 </div>
                                 <span className="font-bold">{m.nome}</span>
@@ -341,7 +341,7 @@ export default function TurmaDetalhePage() {
                               <button
                                 onClick={() => setRemoverAlvo(m)}
                                 aria-label="Remover aluno"
-                                className="inline-flex items-center gap-1 border border-destructive text-destructive px-2 h-8 rounded text-xs font-bold hover:bg-destructive hover:text-white transition-colors"
+                                className="inline-flex items-center gap-1 border border-destructive text-destructive px-2 h-8 rounded text-xs font-bold hover:bg-destructive hover:text-background transition-colors"
                               >
                                 <UserMinus className="h-3 w-3" /> Remover
                               </button>
@@ -367,10 +367,10 @@ export default function TurmaDetalhePage() {
                     Sem correções pendentes.
                   </div>
                 ) : (
-                  <div className="border border-black rounded bg-white divide-y divide-neutral-200">
+                  <div className="border border-border rounded bg-card divide-y divide-neutral-200">
                     {respostasPendentes.map((r) => (
                       <div key={r.id} className="p-4 flex items-center gap-4">
-                        <div className="h-9 w-9 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold">
+                        <div className="h-9 w-9 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-bold">
                           {r.aluno.nome.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -399,7 +399,7 @@ export default function TurmaDetalhePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-foreground/40 z-50 flex items-center justify-center p-4"
               onClick={() => setNovoCasoAberto(false)}
             >
               <motion.div
@@ -407,7 +407,7 @@ export default function TurmaDetalhePage() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white border border-black rounded w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto"
+                className="bg-card border border-border rounded w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold">Adicionar caso à turma</h2>
@@ -426,11 +426,11 @@ export default function TurmaDetalhePage() {
                     placeholder="Buscar caso por título..."
                     value={busca}
                     onChange={(e) => setBusca(e.target.value)}
-                    className="w-full border border-black rounded h-11 pl-10 pr-4 text-sm outline-none focus:border-green transition-colors"
+                    className="w-full border border-border rounded h-11 pl-10 pr-4 text-sm outline-none focus:border-brand transition-colors"
                   />
                 </div>
 
-                <div className="border border-black rounded mb-4 max-h-60 overflow-y-auto divide-y divide-neutral-200">
+                <div className="border border-border rounded mb-4 max-h-60 overflow-y-auto divide-y divide-neutral-200">
                   {casosPlataformaQ.isLoading ? (
                     <div className="p-4 text-sm text-neutral-600 flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin" /> Carregando casos...
@@ -445,11 +445,11 @@ export default function TurmaDetalhePage() {
                         onClick={() => setCasoSelecionadoId(c.id)}
                         className={cn(
                           'w-full text-left p-3 transition-colors hover:bg-neutral-100',
-                          casoSelecionadoId === c.id && 'bg-black text-white hover:bg-black',
+                          casoSelecionadoId === c.id && 'bg-foreground text-background hover:bg-foreground',
                         )}
                       >
                         <p className="font-bold text-sm">{c.titulo}</p>
-                        <p className={cn('text-xs', casoSelecionadoId === c.id ? 'text-white/70' : 'text-neutral-600')}>
+                        <p className={cn('text-xs', casoSelecionadoId === c.id ? 'text-background/70' : 'text-neutral-600')}>
                           {c.area} · {c.dificuldade}
                         </p>
                       </button>
@@ -473,12 +473,12 @@ export default function TurmaDetalhePage() {
                       type="datetime-local"
                       value={prazo}
                       onChange={(e) => setPrazo(e.target.value)}
-                      className="w-full border border-black rounded h-11 px-4 text-sm outline-none focus:border-green transition-colors"
+                      className="w-full border border-border rounded h-11 px-4 text-sm outline-none focus:border-brand transition-colors"
                     />
                   </div>
                 </div>
 
-                {erroNovo && <p className="text-sm text-red-600 font-bold mb-3">{erroNovo}</p>}
+                {erroNovo && <p className="text-sm text-destructive font-bold mb-3">{erroNovo}</p>}
 
                 <div className="flex gap-2 justify-end">
                   <Button variant="outline" size="sm" onClick={() => setNovoCasoAberto(false)}>Cancelar</Button>
@@ -508,14 +508,14 @@ export default function TurmaDetalhePage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setRemoverAlvo(null)}
-              className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"
+              className="fixed inset-0 z-50 bg-foreground/60 flex items-center justify-center p-4"
             >
               <motion.div
                 onClick={(e) => e.stopPropagation()}
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
-                className="bg-white border border-black rounded p-6 max-w-md w-full"
+                className="bg-card border border-border rounded p-6 max-w-md w-full"
               >
                 <h3 className="text-lg font-bold mb-2">Remover aluno</h3>
                 <p className="text-sm text-neutral-600 mb-4">
@@ -552,10 +552,10 @@ function SecaoCasos({
 }) {
   return (
     <section>
-      <h3 className="text-xs uppercase tracking-widest text-neutral-600 font-bold mb-3 pb-2 border-b border-black">
+      <h3 className="text-xs uppercase tracking-widest text-neutral-600 font-bold mb-3 pb-2 border-b border-border">
         {titulo} · {casos.length}
       </h3>
-      <div className={cn('border border-black rounded bg-white divide-y divide-neutral-200', opaco && 'opacity-70')}>
+      <div className={cn('border border-border rounded bg-card divide-y divide-neutral-200', opaco && 'opacity-70')}>
         {casos.map((c) => (
           <div key={c.id} className="p-4 flex flex-wrap items-center gap-4">
             <div className="flex-1 min-w-0">

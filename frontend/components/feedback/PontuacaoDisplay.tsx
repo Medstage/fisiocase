@@ -13,7 +13,7 @@ function mensagem(nota: number): string {
 
 export function PontuacaoDisplay({ nota, xpGanho }: { nota: number; xpGanho?: number }) {
   return (
-    <div className="border border-black rounded p-8 text-center">
+    <div className="border border-border rounded p-8 text-center">
       <p className="text-xs uppercase tracking-wider text-neutral-600 mb-2">Sua pontuação</p>
       <div className="text-6xl font-bold">
         <AnimatedNumber value={nota} format={false} />
@@ -21,7 +21,7 @@ export function PontuacaoDisplay({ nota, xpGanho }: { nota: number; xpGanho?: nu
       </div>
       <p className="text-sm text-neutral-600 mt-2">{mensagem(nota)}</p>
 
-      <div className="mt-6 h-3 border border-black rounded overflow-hidden">
+      <div className="mt-6 h-3 border border-border rounded overflow-hidden">
         <motion.div
           className="h-full bg-green"
           initial={{ width: 0 }}
@@ -31,7 +31,7 @@ export function PontuacaoDisplay({ nota, xpGanho }: { nota: number; xpGanho?: nu
       </div>
 
       {typeof xpGanho === 'number' && (
-        <div className="mt-6 inline-flex items-center gap-2 bg-black text-white rounded px-4 h-10 font-bold">
+        <div className="mt-6 inline-flex items-center gap-2 bg-foreground text-background rounded px-4 h-10 font-bold">
           +<AnimatedNumber value={xpGanho} format={false} /> XP
         </div>
       )}

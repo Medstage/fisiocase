@@ -83,7 +83,7 @@ export default function TurmasPage() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <header className="mb-8 border-b border-black pb-4">
+      <header className="mb-8 border-b border-border pb-4">
         <p className="text-xs uppercase tracking-widest text-neutral-600">Aprendizado em grupo</p>
         <h1 className="text-2xl font-bold">Minhas turmas</h1>
       </header>
@@ -97,7 +97,7 @@ export default function TurmasPage() {
       )}
 
       {/* Entrar em uma turma */}
-      <section className="mb-10 border border-black rounded p-6">
+      <section className="mb-10 border border-border rounded p-6">
         <h2 className="text-sm font-bold uppercase tracking-wider mb-1">Entrar em uma turma</h2>
         <p className="text-sm text-neutral-600 mb-4">
           Cole o código de 6 caracteres compartilhado pelo seu professor.
@@ -149,7 +149,7 @@ export default function TurmasPage() {
           </div>
         ) : turmas.length === 0 ? (
           <div className="border border-dashed border-neutral-400 rounded p-10 text-center">
-            <div className="mx-auto mb-4 h-12 w-12 border border-black rounded-full flex items-center justify-center">
+            <div className="mx-auto mb-4 h-12 w-12 border border-border rounded-full flex items-center justify-center">
               <Users className="h-6 w-6" />
             </div>
             <p className="text-sm text-neutral-600 max-w-sm mx-auto">
@@ -163,10 +163,10 @@ export default function TurmasPage() {
                 key={t.id}
                 whileHover={{ borderColor: '#0F4D0F', y: -2 }}
                 transition={{ duration: 0.2 }}
-                className="border border-black rounded p-6 bg-white flex flex-col gap-4"
+                className="border border-border rounded p-6 bg-card flex flex-col gap-4"
               >
                 <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 shrink-0 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm">
+                  <div className="h-10 w-10 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center font-bold text-sm">
                     {inicial(t.professor?.nome)}
                   </div>
                   <div className="min-w-0">
@@ -194,7 +194,7 @@ export default function TurmasPage() {
 
                 <Link
                   href={`/turmas/${t.id}`}
-                  className="inline-flex items-center justify-between gap-2 mt-2 border-t border-black pt-4 text-sm font-bold uppercase tracking-wider hover:text-green transition-colors"
+                  className="inline-flex items-center justify-between gap-2 mt-2 border-t border-border pt-4 text-sm font-bold uppercase tracking-wider hover:text-green transition-colors"
                 >
                   Ver turma <ArrowRight className="h-4 w-4" />
                 </Link>

@@ -57,7 +57,7 @@ export function StreakDisplay({
         {protetoresStreak !== undefined && protetoresStreak > 0 && (
           <span
             title={`${protetoresStreak} protetor${protetoresStreak > 1 ? 'es' : ''} disponível${protetoresStreak > 1 ? 'eis' : ''}`}
-            className="absolute -top-1 -right-1 bg-white border border-black rounded-full h-5 w-5 flex items-center justify-center"
+            className="absolute -top-1 -right-1 bg-card border border-border rounded-full h-5 w-5 flex items-center justify-center"
           >
             <Shield className="h-3 w-3 text-blue-600" fill="currentColor" />
           </span>

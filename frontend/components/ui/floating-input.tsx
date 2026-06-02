@@ -10,13 +10,13 @@ export interface FloatingInputProps extends React.InputHTMLAttributes<HTMLInputE
 // Input com floating label (padrão do Stitch): borda preta, foco verde, sem sombra.
 export const FloatingInput = React.forwardRef<HTMLInputElement, FloatingInputProps>(
   ({ label, id, className, children, ...props }, ref) => (
-    <div className="relative flex items-center border border-black bg-white rounded transition-colors duration-150 focus-within:border-green">
+    <div className="relative flex items-center border border-border bg-card rounded transition-colors duration-150 focus-within:border-brand">
       <input
         ref={ref}
         id={id}
         placeholder=" "
         className={cn(
-          'peer block w-full px-4 pb-2 pt-5 text-black bg-transparent border-0 outline-none focus:ring-0 appearance-none text-sm',
+          'peer block w-full px-4 pb-2 pt-5 text-foreground bg-transparent border-0 outline-none focus:ring-0 appearance-none text-sm',
           className,
         )}
         {...props}

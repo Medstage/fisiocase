@@ -5,7 +5,7 @@ type Accent = 'green' | 'black' | 'neutral';
 
 const accents: Record<Accent, { border: string; icon: string }> = {
   green: { border: 'border-l-green', icon: 'text-green' },
-  black: { border: 'border-l-black', icon: 'text-black' },
+  black: { border: 'border-l-border', icon: 'text-foreground' },
   neutral: { border: 'border-l-neutral-400', icon: 'text-neutral-500' },
 };
 
@@ -24,7 +24,7 @@ export function FeedbackCard({
 }) {
   const a = accents[accent];
   return (
-    <div className={cn('border border-black border-l-4 rounded p-6', a.border)}>
+    <div className={cn('border border-border border-l-4 rounded p-6', a.border)}>
       <h3 className="flex items-center gap-2 text-sm font-bold mb-3">
         {Icon && <Icon className={cn('h-4 w-4', a.icon)} />}
         {titulo}

@@ -6,12 +6,16 @@ import { cn } from '@/lib/utils';
 type Variant = 'default' | 'outline' | 'green' | 'ghost';
 type Size = 'default' | 'sm' | 'lg' | 'icon';
 
-// Botões "Strict Flat" do Stitch: primário = preto invertido (uppercase); outline = branco/borda preta.
+// Botões: primário = verde fisio (identidade), outline = neutro com borda, green = verde-vivo, ghost = transparente.
 const variantClasses: Record<Variant, string> = {
-  default: 'bg-black text-white border border-black hover:bg-white hover:text-black uppercase tracking-wider',
-  outline: 'bg-white text-black border border-black hover:bg-black hover:text-white',
-  green: 'bg-green text-white border border-green hover:bg-green-dark',
-  ghost: 'bg-transparent text-black border border-transparent hover:bg-neutral-100',
+  default:
+    'bg-primary text-primary-foreground border border-primary hover:bg-brand hover:border-brand uppercase tracking-wider',
+  outline:
+    'bg-card text-foreground border border-border hover:bg-accent hover:border-primary hover:text-primary',
+  green:
+    'bg-brand text-brand-foreground border border-brand hover:bg-primary hover:border-primary',
+  ghost:
+    'bg-transparent text-foreground border border-transparent hover:bg-accent',
 };
 
 const sizeClasses: Record<Size, string> = {

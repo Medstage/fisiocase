@@ -78,7 +78,7 @@ export default function CadastroPage() {
       <div className="mt-8 text-center">
         <p className="text-sm text-neutral-600">
           Já tem conta?{' '}
-          <Link href="/login" className="text-black font-bold hover:underline underline-offset-4">
+          <Link href="/login" className="text-foreground font-bold hover:underline underline-offset-4">
             Entrar
           </Link>
         </p>

@@ -65,8 +65,8 @@ export default function RespostasAdminPage() {
                 setArea('');
                 setPage(1);
               }}
-              className={`px-4 h-9 rounded border border-black text-xs transition-all active:scale-[0.98] ${
-                area === '' ? 'bg-black text-white' : 'bg-white text-black hover:bg-neutral-100'
+              className={`px-4 h-9 rounded border border-border text-xs transition-all active:scale-[0.98] ${
+                area === '' ? 'bg-foreground text-background' : 'bg-background text-foreground hover:bg-neutral-100'
               }`}
             >
               Todas
@@ -79,8 +79,8 @@ export default function RespostasAdminPage() {
                   setArea(a);
                   setPage(1);
                 }}
-                className={`px-4 h-9 rounded border border-black text-xs transition-all active:scale-[0.98] ${
-                  area === a ? 'bg-black text-white' : 'bg-white text-black hover:bg-neutral-100'
+                className={`px-4 h-9 rounded border border-border text-xs transition-all active:scale-[0.98] ${
+                  area === a ? 'bg-foreground text-background' : 'bg-background text-foreground hover:bg-neutral-100'
                 }`}
               >
                 {AREA_LABEL[a]}
@@ -99,10 +99,10 @@ export default function RespostasAdminPage() {
           </div>
         ) : (
           <>
-            <div className="border border-black rounded bg-white overflow-x-auto">
+            <div className="border border-border rounded bg-card overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-black text-left text-xs uppercase tracking-wider text-neutral-600">
+                  <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-neutral-600">
                     <th className="p-4 font-bold">Aluno</th>
                     <th className="p-4 font-bold">Caso</th>
                     <th className="p-4 font-bold">Área</th>

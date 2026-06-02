@@ -109,38 +109,38 @@ export default function CasoPage() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
-      className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] border border-black rounded overflow-hidden min-h-[calc(100vh-9rem)]"
+      className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] border border-border rounded overflow-hidden min-h-[calc(100vh-9rem)]"
     >
       {/* Painel esquerdo: detalhes do caso */}
-      <div className="border-b lg:border-b-0 lg:border-r border-black p-6 overflow-y-auto">
+      <div className="border-b lg:border-b-0 lg:border-r border-border p-6 overflow-y-auto">
         <CasoViewer caso={caso} />
       </div>
 
       {/* Painel direito: conduta */}
       <div className="flex flex-col">
-        <div className="h-14 shrink-0 border-b border-black flex items-center justify-between px-6">
+        <div className="h-14 shrink-0 border-b border-border flex items-center justify-between px-6">
           <h2 className="text-lg font-bold">Sua conduta clínica</h2>
-          <div className="flex items-center gap-2 border border-black rounded px-3 h-9">
-            <TimerIcon className={cn('h-4 w-4', critico ? 'text-black' : 'text-green')} />
+          <div className="flex items-center gap-2 border border-border rounded px-3 h-9">
+            <TimerIcon className={cn('h-4 w-4', critico ? 'text-foreground' : 'text-green')} />
             <motion.span
               animate={critico ? { opacity: [1, 0.4, 1] } : { opacity: 1 }}
               transition={critico ? { repeat: Infinity, duration: 1 } : {}}
-              className={cn('font-bold tabular-nums w-12 text-center', critico ? 'text-black' : 'text-green')}
+              className={cn('font-bold tabular-nums w-12 text-center', critico ? 'text-foreground' : 'text-green')}
             >
               {fmt(timer.secondsLeft)}
             </motion.span>
-            <button type="button" onClick={timer.toggle} aria-label={timer.running ? 'Pausar' : 'Retomar'} className="text-neutral-600 hover:text-black">
+            <button type="button" onClick={timer.toggle} aria-label={timer.running ? 'Pausar' : 'Retomar'} className="text-neutral-600 hover:text-foreground">
               {timer.running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             </button>
           </div>
         </div>
 
         <div className="flex-1 flex flex-col p-6">
-          <div className="flex items-center gap-1 mb-2 pb-2 border-b border-black">
-            <button type="button" onClick={() => wrap('**')} title="Negrito" className="w-8 h-8 flex items-center justify-center border border-transparent hover:border-black hover:bg-neutral-100 rounded">
+          <div className="flex items-center gap-1 mb-2 pb-2 border-b border-border">
+            <button type="button" onClick={() => wrap('**')} title="Negrito" className="w-8 h-8 flex items-center justify-center border border-transparent hover:border-border hover:bg-neutral-100 rounded">
               <Bold className="h-4 w-4" />
             </button>
-            <button type="button" onClick={prefixLista} title="Lista" className="w-8 h-8 flex items-center justify-center border border-transparent hover:border-black hover:bg-neutral-100 rounded">
+            <button type="button" onClick={prefixLista} title="Lista" className="w-8 h-8 flex items-center justify-center border border-transparent hover:border-border hover:bg-neutral-100 rounded">
               <List className="h-4 w-4" />
             </button>
           </div>
@@ -159,7 +159,7 @@ export default function CasoPage() {
           )}
         </div>
 
-        <div className="shrink-0 border-t border-black p-6 flex justify-between items-center gap-4">
+        <div className="shrink-0 border-t border-border p-6 flex justify-between items-center gap-4">
           <span className="text-sm text-neutral-600">{conteudo.length} caracteres</span>
           <Button disabled={conteudo.trim().length < 10 || enviar.isPending} onClick={() => enviar.mutate()}>
             {enviar.isPending ? (

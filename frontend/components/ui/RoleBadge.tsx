@@ -15,7 +15,7 @@ export function RoleBadge({
     return (
       <span
         className={cn(
-          'inline-flex items-center bg-black text-white text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wide',
+          'inline-flex items-center bg-foreground text-background text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wide',
           className,
         )}
       >
@@ -27,7 +27,7 @@ export function RoleBadge({
     return (
       <span
         className={cn(
-          'inline-flex items-center bg-black text-white text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wide',
+          'inline-flex items-center bg-foreground text-background text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wide',
           className,
         )}
       >

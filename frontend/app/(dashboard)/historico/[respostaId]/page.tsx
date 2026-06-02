@@ -95,8 +95,8 @@ export default function HistoricoDetalhePage() {
 
     return (
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className="max-w-4xl">
-        <header className="flex items-center gap-3 mb-6 pb-4 border-b border-black">
-          <Link href="/historico" aria-label="Voltar" className="border border-black p-2 rounded hover:bg-black hover:text-white transition-colors">
+        <header className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
+          <Link href="/historico" aria-label="Voltar" className="border border-border p-2 rounded hover:bg-foreground hover:text-background transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div className="min-w-0">
@@ -128,14 +128,14 @@ export default function HistoricoDetalhePage() {
           </div>
         ) : (
           <>
-            <div className="border border-black rounded p-8 text-center mb-6">
+            <div className="border border-border rounded p-8 text-center mb-6">
               <p className="text-xs uppercase tracking-wider text-neutral-600 mb-2">Sua nota</p>
               <div className="text-6xl font-bold">
                 {r.notaProfessor?.toFixed(1) ?? '—'}
                 <span className="text-2xl text-neutral-600">/10</span>
               </div>
               {r.xpGanho ? (
-                <div className="mt-4 inline-flex items-center gap-2 bg-black text-white rounded px-4 h-10 font-bold">
+                <div className="mt-4 inline-flex items-center gap-2 bg-foreground text-background rounded px-4 h-10 font-bold">
                   +{r.xpGanho} XP
                 </div>
               ) : null}
@@ -152,7 +152,7 @@ export default function HistoricoDetalhePage() {
           </>
         )}
 
-        <div className="border border-black rounded p-6 mb-6">
+        <div className="border border-border rounded p-6 mb-6">
           <p className="text-xs uppercase tracking-wider text-neutral-600 mb-2">O que você respondeu</p>
           <p className="text-sm whitespace-pre-line leading-relaxed">{r.conteudo}</p>
         </div>
@@ -160,7 +160,7 @@ export default function HistoricoDetalhePage() {
         <h2 className="text-lg font-bold mb-3">O caso clínico completo</h2>
         <CasoViewer caso={caso} />
 
-        <div className="mt-8 pt-6 border-t border-black">
+        <div className="mt-8 pt-6 border-t border-border">
           <Link href={`/turmas/${r.casoTurma.turma.id}`}>
             <Button variant="outline">Voltar para a turma</Button>
           </Link>
@@ -179,8 +179,8 @@ export default function HistoricoDetalhePage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className="max-w-4xl">
-      <header className="flex items-center gap-3 mb-6 pb-4 border-b border-black">
-        <Link href="/historico" aria-label="Voltar" className="border border-black p-2 rounded hover:bg-black hover:text-white transition-colors">
+      <header className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
+        <Link href="/historico" aria-label="Voltar" className="border border-border p-2 rounded hover:bg-foreground hover:text-background transition-colors">
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div className="min-w-0">
@@ -206,7 +206,7 @@ export default function HistoricoDetalhePage() {
 
       <PontuacaoDisplay nota={r.nota ?? 0} xpGanho={r.xpGanho} />
 
-      <div className="border border-black rounded p-6 my-6">
+      <div className="border border-border rounded p-6 my-6">
         <p className="text-xs uppercase tracking-wider text-neutral-600 mb-2">O que você respondeu</p>
         <p className="text-sm whitespace-pre-line leading-relaxed">{r.conteudo}</p>
       </div>
@@ -230,7 +230,7 @@ export default function HistoricoDetalhePage() {
       <h2 className="text-lg font-bold mb-3">O caso clínico completo</h2>
       <CasoViewer caso={caso} />
 
-      <div className="mt-8 pt-6 border-t border-black flex flex-wrap gap-4">
+      <div className="mt-8 pt-6 border-t border-border flex flex-wrap gap-4">
         <Link href={`/caso/${caso.id}`}>
           <Button className="gap-2">
             <RotateCcw className="h-4 w-4" /> Tentar novamente

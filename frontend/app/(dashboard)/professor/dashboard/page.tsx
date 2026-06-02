@@ -136,14 +136,14 @@ export default function ProfessorDashboardPage() {
                 label="Total de alunos"
                 value={totalAlunos}
                 icon={Trophy}
-                iconColor="text-yellow-500"
+                iconColor="text-warning"
                 format={false}
               />
               <MetricCard
                 label="Correções pendentes"
                 value={pendentes.length}
                 icon={ClipboardCheck}
-                iconColor={pendentes.length > 0 ? 'text-orange-500' : 'text-neutral-600'}
+                iconColor={pendentes.length > 0 ? 'text-warning' : 'text-neutral-600'}
                 format={false}
               />
               <MetricCard
@@ -173,10 +173,10 @@ export default function ProfessorDashboardPage() {
                     Sem correções pendentes no momento.
                   </div>
                 ) : (
-                  <div className="border border-black rounded bg-white divide-y divide-neutral-200">
+                  <div className="border border-border rounded bg-card divide-y divide-neutral-200">
                     {filaPendentes.map(({ resposta, turma, casoTurma }) => (
                       <div key={resposta.id} className="p-4 flex items-center gap-4">
-                        <div className="h-9 w-9 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold">
+                        <div className="h-9 w-9 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-bold">
                           {resposta.aluno.nome.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -204,7 +204,7 @@ export default function ProfessorDashboardPage() {
                 {turmas.length === 0 ? (
                   <div className="border border-dashed border-neutral-400 rounded p-8 text-center text-sm text-neutral-500">
                     Você ainda não tem turmas.{' '}
-                    <Link href="/professor/turmas" className="font-bold text-black underline">
+                    <Link href="/professor/turmas" className="font-bold text-foreground underline">
                       Criar agora
                     </Link>
                     .
@@ -215,7 +215,7 @@ export default function ProfessorDashboardPage() {
                       <Link
                         key={turma.id}
                         href={`/professor/turmas/${turma.id}`}
-                        className="block border border-black rounded p-4 bg-white hover:border-green transition-colors"
+                        className="block border border-border rounded p-4 bg-card hover:border-green transition-colors"
                       >
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <div className="min-w-0">
@@ -226,7 +226,7 @@ export default function ProfessorDashboardPage() {
                           </div>
                           <ArrowRight className="h-4 w-4 mt-1 shrink-0" />
                         </div>
-                        <div className="h-2 border border-black rounded overflow-hidden">
+                        <div className="h-2 border border-border rounded overflow-hidden">
                           <motion.div
                             className="h-full bg-green"
                             initial={{ width: 0 }}

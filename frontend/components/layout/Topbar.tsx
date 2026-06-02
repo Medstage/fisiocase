@@ -3,6 +3,7 @@
 import { Menu, Search } from 'lucide-react';
 import type { Usuario } from '@/types';
 import { NotificationsBell } from './NotificationsBell';
+import { ThemeToggle } from './ThemeToggle';
 import { useUiStore } from '@/store/uiStore';
 
 function saudacao(): string {
@@ -17,13 +18,13 @@ export function Topbar({ usuario }: { usuario?: Partial<Usuario> }) {
   const setMobileOpen = useUiStore((s) => s.setMobileOpen);
 
   return (
-    <header className="h-16 shrink-0 border-b border-black bg-white flex items-center justify-between gap-3 px-4 md:px-8">
+    <header className="h-16 shrink-0 border-b border-border bg-card flex items-center justify-between gap-3 px-4 md:px-8">
       <div className="flex items-center gap-3 min-w-0 flex-1">
         <button
           type="button"
           aria-label="Abrir menu"
           onClick={() => setMobileOpen(true)}
-          className="md:hidden border border-black rounded p-2 hover:bg-neutral-100 transition-colors shrink-0"
+          className="md:hidden border border-border rounded p-2 hover:bg-neutral-100 transition-colors shrink-0"
         >
           <Menu className="h-5 w-5" />
         </button>
@@ -32,14 +33,15 @@ export function Topbar({ usuario }: { usuario?: Partial<Usuario> }) {
         </h1>
       </div>
 
-      <div className="flex items-center gap-3 md:gap-4 shrink-0">
-        <div className="hidden lg:flex items-center gap-2 border border-black rounded px-3 h-10 w-64 focus-within:border-green transition-colors">
-          <Search className="h-4 w-4 text-neutral-600" />
+      <div className="flex items-center gap-2 md:gap-3 shrink-0">
+        <div className="hidden lg:flex items-center gap-2 border border-border rounded px-3 h-10 w-64 bg-card focus-within:border-brand transition-colors">
+          <Search className="h-4 w-4 text-muted-foreground" />
           <input
             placeholder="Buscar casos..."
-            className="w-full bg-transparent outline-none text-sm placeholder:text-neutral-500"
+            className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground"
           />
         </div>
+        <ThemeToggle />
         <NotificationsBell />
       </div>
     </header>

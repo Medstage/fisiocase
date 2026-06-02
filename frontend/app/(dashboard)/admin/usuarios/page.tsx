@@ -75,7 +75,7 @@ export default function UsuariosAdminPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Buscar por nome ou email..."
-            className="w-full h-11 pl-11 pr-4 border border-black rounded bg-white text-sm outline-none focus:border-green transition-colors"
+            className="w-full h-11 pl-11 pr-4 border border-border rounded bg-card text-sm outline-none focus:border-brand transition-colors"
           />
         </div>
 
@@ -89,10 +89,10 @@ export default function UsuariosAdminPage() {
           </div>
         ) : (
           <>
-            <div className="border border-black rounded bg-white overflow-x-auto">
+            <div className="border border-border rounded bg-card overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-black text-left text-xs uppercase tracking-wider text-neutral-600">
+                  <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-neutral-600">
                     <th className="p-4 font-bold">Nome</th>
                     <th className="p-4 font-bold">Email</th>
                     <th className="p-4 font-bold">Nível</th>

@@ -50,17 +50,17 @@ export default function LoginPage() {
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
         >
-          <button type="button" aria-label="Mostrar/ocultar senha" onClick={() => setMostrarSenha((v) => !v)} className="px-3 text-neutral-600 hover:text-black">
+          <button type="button" aria-label="Mostrar/ocultar senha" onClick={() => setMostrarSenha((v) => !v)} className="px-3 text-neutral-600 hover:text-foreground">
             {mostrarSenha ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
           </button>
         </FloatingInput>
 
         <div className="flex items-center justify-between">
           <label className="flex items-center gap-2 cursor-pointer group">
-            <input type="checkbox" className="h-4 w-4 border-black rounded-sm accent-green" />
-            <span className="text-sm text-neutral-600 group-hover:text-black transition-colors">Lembrar de mim</span>
+            <input type="checkbox" className="h-4 w-4 border-border rounded-sm accent-green" />
+            <span className="text-sm text-neutral-600 group-hover:text-foreground transition-colors">Lembrar de mim</span>
           </label>
-          <Link href="/recuperar-senha" className="text-sm text-neutral-600 hover:text-black underline decoration-1 underline-offset-4 transition-colors">
+          <Link href="/recuperar-senha" className="text-sm text-neutral-600 hover:text-foreground underline decoration-1 underline-offset-4 transition-colors">
             Esqueceu a senha?
           </Link>
         </div>
@@ -75,7 +75,7 @@ export default function LoginPage() {
       <div className="mt-8 text-center">
         <p className="text-sm text-neutral-600">
           Não tem conta?{' '}
-          <Link href="/cadastro" className="text-black font-bold hover:underline underline-offset-4">
+          <Link href="/cadastro" className="text-foreground font-bold hover:underline underline-offset-4">
             Criar agora
           </Link>
         </p>

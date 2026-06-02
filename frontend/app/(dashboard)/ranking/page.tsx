@@ -34,7 +34,7 @@ interface Missao {
 
 function Inicial({ nome, sou }: { nome: string; sou?: boolean }) {
   return (
-    <span className={cn('h-8 w-8 shrink-0 rounded-full flex items-center justify-center text-xs font-bold', sou ? 'bg-white text-black' : 'bg-black text-white')}>
+    <span className={cn('h-8 w-8 shrink-0 rounded-full flex items-center justify-center text-xs font-bold', sou ? 'bg-background text-foreground' : 'bg-foreground text-background')}>
       {nome.charAt(0).toUpperCase()}
     </span>
   );
@@ -42,7 +42,7 @@ function Inicial({ nome, sou }: { nome: string; sou?: boolean }) {
 
 function LinhaRank({ row, sou, mostrarCasos }: { row: RankRow; sou: boolean; mostrarCasos: boolean }) {
   return (
-    <div className={cn('grid grid-cols-[40px_1fr_90px] sm:grid-cols-[48px_1fr_120px_100px_90px] items-center gap-2 px-4 py-3', sou && 'bg-black text-white')}>
+    <div className={cn('grid grid-cols-[40px_1fr_90px] sm:grid-cols-[48px_1fr_120px_100px_90px] items-center gap-2 px-4 py-3', sou && 'bg-foreground text-background')}>
       <span className="font-bold flex items-center justify-center">
         {row.posicao <= 3 ? <Medal className="h-5 w-5" /> : row.posicao}
       </span>
@@ -52,7 +52,7 @@ function LinhaRank({ row, sou, mostrarCasos }: { row: RankRow; sou: boolean; mos
         {row.sequenciaAtual && row.sequenciaAtual > 0 ? (
           <span
             title={`${row.sequenciaAtual} dias consecutivos`}
-            className={cn('inline-flex items-center gap-0.5 text-[11px] font-bold shrink-0', sou ? 'text-white' : 'text-orange-500')}
+            className={cn('inline-flex items-center gap-0.5 text-[11px] font-bold shrink-0', sou ? 'text-background' : 'text-warning')}
           >
             <Flame className="h-3 w-3" fill="currentColor" strokeWidth={1.5} />
             {row.sequenciaAtual}
@@ -61,7 +61,7 @@ function LinhaRank({ row, sou, mostrarCasos }: { row: RankRow; sou: boolean; mos
       </span>
       <span className="hidden sm:flex justify-center">
         {row.nivel ? (
-          sou ? <span className="text-xs border border-white rounded px-2 py-0.5">{row.nivel}</span> : <Badge>{row.nivel}</Badge>
+          sou ? <span className="text-xs border border-background rounded px-2 py-0.5">{row.nivel}</span> : <Badge>{row.nivel}</Badge>
         ) : (
           <span className="text-neutral-400">—</span>
         )}
@@ -111,7 +111,7 @@ export default function RankingPage() {
   const Aba = ({ id, label }: { id: Tab; label: string }) => (
     <button
       onClick={() => setTab(id)}
-      className={cn('px-1 pb-3 text-sm font-bold uppercase tracking-wide border-b-2 transition-colors', tab === id ? 'border-green text-black' : 'border-transparent text-neutral-500 hover:text-black')}
+      className={cn('px-1 pb-3 text-sm font-bold uppercase tracking-wide border-b-2 transition-colors', tab === id ? 'border-green text-foreground' : 'border-transparent text-neutral-500 hover:text-foreground')}
     >
       {label}
     </button>
@@ -124,7 +124,7 @@ export default function RankingPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <div className="border border-black rounded p-6 flex items-center justify-between gap-4">
+          <div className="border border-border rounded p-6 flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <Trophy className="h-8 w-8 text-green shrink-0" />
               <div>
@@ -140,7 +140,7 @@ export default function RankingPage() {
             </div>
           </div>
 
-          <div className="flex gap-6 border-b border-black">
+          <div className="flex gap-6 border-b border-border">
             <Aba id="global" label="Global" />
             <Aba id="semanal" label="Semanal" />
             <Aba id="amigos" label="Amigos" />
@@ -151,8 +151,8 @@ export default function RankingPage() {
               Ranking entre amigos chega em breve.
             </div>
           ) : (
-            <div className="border border-black rounded overflow-hidden">
-              <div className="grid grid-cols-[40px_1fr_90px] sm:grid-cols-[48px_1fr_120px_100px_90px] gap-2 px-4 py-2 border-b border-black text-[10px] uppercase tracking-wider text-neutral-600 font-bold">
+            <div className="border border-border rounded overflow-hidden">
+              <div className="grid grid-cols-[40px_1fr_90px] sm:grid-cols-[48px_1fr_120px_100px_90px] gap-2 px-4 py-2 border-b border-border text-[10px] uppercase tracking-wider text-neutral-600 font-bold">
                 <span className="text-center">#</span>
                 <span>Estudante</span>
                 <span className="hidden sm:block text-center">Nível</span>
@@ -180,7 +180,7 @@ export default function RankingPage() {
         </div>
 
         <aside className="space-y-6">
-          <div className="border border-black rounded p-6">
+          <div className="border border-border rounded p-6">
             <h3 className="text-sm font-bold uppercase tracking-wide mb-4">Missões diárias</h3>
             <ul className="space-y-3">
               {missoes.length === 0 && <li className="text-sm text-neutral-500">Sem missões hoje.</li>}
@@ -188,8 +188,8 @@ export default function RankingPage() {
                 const ok = !!m.completedAt || m.progresso >= m.meta;
                 return (
                   <li key={m.id} className="flex items-start gap-2 text-sm">
-                    <span className={cn('mt-0.5 h-4 w-4 shrink-0 border border-black rounded-sm flex items-center justify-center', ok && 'bg-green border-green')}>
-                      {ok && <CheckCircle2 className="h-3 w-3 text-white" />}
+                    <span className={cn('mt-0.5 h-4 w-4 shrink-0 border border-border rounded-sm flex items-center justify-center', ok && 'bg-green border-green')}>
+                      {ok && <CheckCircle2 className="h-3 w-3 text-background" />}
                     </span>
                     <span className={cn(ok && 'line-through text-neutral-400')}>{m.titulo}</span>
                   </li>
@@ -198,7 +198,7 @@ export default function RankingPage() {
             </ul>
           </div>
 
-          <div className="border border-black rounded p-6">
+          <div className="border border-border rounded p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold uppercase tracking-wide">Suas conquistas</h3>
               <span className="text-xs font-bold text-neutral-600">
@@ -212,7 +212,7 @@ export default function RankingPage() {
                   <div
                     key={c.id}
                     title={c.titulo}
-                    className={cn('aspect-square border rounded flex items-center justify-center', c.desbloqueada ? `border-black ${cor}` : 'border-neutral-300 text-neutral-300')}
+                    className={cn('aspect-square border rounded flex items-center justify-center', c.desbloqueada ? `border-border ${cor}` : 'border-neutral-300 text-neutral-300')}
                   >
                     {c.desbloqueada ? <Icon className="h-5 w-5" /> : <Lock className="h-4 w-4" />}
                   </div>
@@ -224,7 +224,7 @@ export default function RankingPage() {
             </a>
           </div>
 
-          <div className="border border-black rounded p-6">
+          <div className="border border-border rounded p-6">
             <h3 className="text-sm font-bold uppercase tracking-wide mb-4">Sistema de níveis</h3>
             <div className="space-y-4">
               {NIVEIS.map((n, i) => {
@@ -240,7 +240,7 @@ export default function RankingPage() {
                       </span>
                       {atual && <span className="text-xs text-neutral-600">{(usuario?.xpTotal ?? 0).toLocaleString('pt-BR')} XP</span>}
                     </div>
-                    <div className="h-2 border border-black rounded overflow-hidden">
+                    <div className="h-2 border border-border rounded overflow-hidden">
                       <div className="h-full bg-green" style={{ width: `${pct}%` }} />
                     </div>
                     {atual && prog.proximo && (

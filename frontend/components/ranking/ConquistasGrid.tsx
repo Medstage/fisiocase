@@ -22,15 +22,15 @@ function ConquistaCard({ conquista, index }: { conquista: Conquista; index: numb
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.2, delay: Math.min(index * 0.03, 0.3) }}
       className={cn(
-        'border rounded p-6 bg-white flex flex-col',
-        desbloqueada ? 'border-green' : 'border-black opacity-50',
+        'border rounded p-6 bg-card flex flex-col',
+        desbloqueada ? 'border-green' : 'border-border opacity-50',
       )}
     >
       <div className="flex items-start justify-between mb-3">
         <span
           className={cn(
             'h-10 w-10 rounded flex items-center justify-center border',
-            desbloqueada ? `border-black ${cor}` : 'border-black text-neutral-400',
+            desbloqueada ? `border-border ${cor}` : 'border-border text-neutral-400',
           )}
         >
           {desbloqueada ? <Icon className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
