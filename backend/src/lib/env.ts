@@ -5,7 +5,8 @@ const envSchema = z.object({
   DATABASE_URL: z.string().min(1, 'DATABASE_URL é obrigatória'),
   JWT_SECRET: z.string().min(10, 'JWT_SECRET deve ter ao menos 10 caracteres'),
   ANTHROPIC_API_KEY: z.string().optional(),
-  ANTHROPIC_MODEL: z.string().default('claude-sonnet-4-20250514'),
+  // Sonnet 4.5 — Sonnet 4 original (claude-sonnet-4-20250514) está deprecated (fim em jun/2026)
+  ANTHROPIC_MODEL: z.string().default('claude-sonnet-4-5-20250929'),
   NEXTAUTH_SECRET: z.string().optional(),
   NEXTAUTH_URL: z.string().default('http://localhost:3000'),
   PORT: z.string().default('3001'),
