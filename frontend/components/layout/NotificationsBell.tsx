@@ -81,25 +81,25 @@ export function NotificationsBell() {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label="Notificações"
-        className="relative h-10 w-10 border border-black rounded flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+        className="relative h-10 w-10 border border-border rounded flex items-center justify-center hover:bg-foreground hover:text-background transition-colors"
       >
         <Bell className="h-4 w-4" />
         {totalBadge > 0 && (
-          <span className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full bg-green text-white text-[10px] font-bold flex items-center justify-center">
+          <span className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full bg-green text-background text-[10px] font-bold flex items-center justify-center">
             {totalBadge > 9 ? '9+' : totalBadge}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-96 border border-black rounded bg-white z-50">
-          <div className="px-4 h-12 border-b border-black flex items-center justify-between">
+        <div className="absolute right-0 mt-2 w-96 border border-border rounded bg-card z-50">
+          <div className="px-4 h-12 border-b border-border flex items-center justify-between">
             <span className="text-xs uppercase tracking-wider text-neutral-600 font-bold">Notificações</span>
             {naoLidas > 0 && (
               <button
                 onClick={() => marcarTodasLidas.mutate()}
                 disabled={marcarTodasLidas.isPending}
-                className="text-xs text-neutral-600 hover:text-black underline underline-offset-2"
+                className="text-xs text-neutral-600 hover:text-foreground underline underline-offset-2"
               >
                 Marcar todas como lidas
               </button>
@@ -133,7 +133,7 @@ export function NotificationsBell() {
             {/* Missões pendentes (fallback / extras) */}
             {missoesPendentes.map((m) => (
               <div key={m.id} className="p-3 flex gap-3">
-                <Target className="h-4 w-4 text-orange-500 mt-0.5 shrink-0" />
+                <Target className="h-4 w-4 text-warning mt-0.5 shrink-0" />
                 <div className="min-w-0">
                   <p className="text-xs font-bold uppercase tracking-wide text-neutral-600">Missão diária</p>
                   <p className="text-sm font-medium">{m.titulo}</p>

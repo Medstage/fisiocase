@@ -65,19 +65,19 @@ export default function DashboardPage() {
           protetoresStreak={streak?.protetoresStreak ?? 0}
           resolveuHoje={streak?.resolveuHoje ?? false}
         />
-        <MetricCard label="Total XP" value={xpTotal} icon={Zap} iconColor="text-amber-500" />
+        <MetricCard label="Total XP" value={xpTotal} icon={Zap} iconColor="text-warning" />
         {/* Nível (card custom — nome + progresso) */}
         <motion.div
           whileHover={{ borderColor: '#0F4D0F', y: -2 }}
           transition={{ duration: 0.2 }}
-          className="border border-black rounded p-6 bg-white"
+          className="border border-border rounded p-6 bg-card"
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs uppercase tracking-wider text-neutral-600">Nível</span>
             <TrendingUp className="h-4 w-4 text-neutral-600" />
           </div>
           <div className="text-2xl font-bold">{prog.nivel}</div>
-          <div className="mt-3 h-2 border border-black rounded overflow-hidden">
+          <div className="mt-3 h-2 border border-border rounded overflow-hidden">
             <motion.div
               className="h-full bg-green"
               initial={{ width: 0 }}
@@ -89,14 +89,14 @@ export default function DashboardPage() {
             {prog.proximo ? `Faltam ${prog.faltam.toLocaleString('pt-BR')} XP para ${prog.proximo}` : 'Nível máximo!'}
           </p>
         </motion.div>
-        <MetricCard label="Ranking geral" value={posicao?.posicao ?? 0} prefix="#" icon={Trophy} iconColor="text-yellow-500" format={false} />
+        <MetricCard label="Ranking geral" value={posicao?.posicao ?? 0} prefix="#" icon={Trophy} iconColor="text-warning" format={false} />
       </div>
 
       {/* CTA */}
       <Link href="/novo-caso" className="block mb-8">
         <motion.div
           whileTap={{ scale: 0.99 }}
-          className="bg-black text-white rounded h-14 flex items-center justify-center gap-2 font-bold uppercase tracking-wider hover:bg-green transition-colors"
+          className="bg-primary text-primary-foreground rounded h-14 flex items-center justify-center gap-2 font-bold uppercase tracking-wider hover:bg-brand transition-colors"
         >
           <Plus className="h-5 w-5" />
           Iniciar novo caso
@@ -111,7 +111,7 @@ export default function DashboardPage() {
             {respostas.length === 0 && (
               <div className="border border-dashed border-neutral-400 rounded p-8 text-center text-sm text-neutral-500">
                 Você ainda não resolveu nenhum caso. Que tal{' '}
-                <Link href="/novo-caso" className="font-bold text-black underline">
+                <Link href="/novo-caso" className="font-bold text-foreground underline">
                   começar agora
                 </Link>
                 ?

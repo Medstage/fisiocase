@@ -98,11 +98,11 @@ export default function FeedbackTurmaPage() {
         transition={{ duration: 0.2 }}
         className="max-w-3xl mx-auto"
       >
-        <header className="mb-8 border-b border-black pb-4 flex items-center gap-4">
+        <header className="mb-8 border-b border-border pb-4 flex items-center gap-4">
           <Link
             href={`/turmas/${id}`}
             aria-label="Voltar para turma"
-            className="border border-black p-2 hover:bg-black hover:text-white transition-colors rounded"
+            className="border border-border p-2 hover:bg-foreground hover:text-background transition-colors rounded"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -126,11 +126,11 @@ export default function FeedbackTurmaPage() {
         transition={{ duration: 0.2 }}
         className="max-w-3xl mx-auto"
       >
-        <header className="mb-8 border-b border-black pb-4 flex items-center gap-4">
+        <header className="mb-8 border-b border-border pb-4 flex items-center gap-4">
           <Link
             href={`/turmas/${id}`}
             aria-label="Voltar para turma"
-            className="border border-black p-2 hover:bg-black hover:text-white transition-colors rounded"
+            className="border border-border p-2 hover:bg-foreground hover:text-background transition-colors rounded"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -139,7 +139,7 @@ export default function FeedbackTurmaPage() {
             <h1 className="text-xl font-bold truncate">{resposta.casoTurma.titulo}</h1>
           </div>
         </header>
-        <div className="border border-black border-l-4 border-l-amber-500 rounded p-6">
+        <div className="border border-border border-l-4 border-l-amber-500 rounded p-6">
           <p className="text-sm">
             Sua resposta foi enviada, mas o professor ainda não corrigiu. Volte aqui assim que
             receber a notificação.
@@ -160,11 +160,11 @@ export default function FeedbackTurmaPage() {
       className="max-w-3xl mx-auto"
     >
       {/* Header */}
-      <header className="mb-8 border-b border-black pb-4 flex items-center gap-4">
+      <header className="mb-8 border-b border-border pb-4 flex items-center gap-4">
         <Link
           href={`/turmas/${id}`}
           aria-label="Voltar para turma"
-          className="border border-black p-2 hover:bg-black hover:text-white transition-colors rounded"
+          className="border border-border p-2 hover:bg-foreground hover:text-background transition-colors rounded"
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>
@@ -175,7 +175,7 @@ export default function FeedbackTurmaPage() {
           <h1 className="text-xl font-bold truncate">{resposta.casoTurma.titulo}</h1>
         </div>
         <div className="hidden sm:flex items-center gap-2 shrink-0">
-          <div className="h-8 w-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-xs">
+          <div className="h-8 w-8 rounded-full bg-foreground text-background flex items-center justify-center font-bold text-xs">
             {inicial(professor?.nome)}
           </div>
           <span className="text-sm">{professor?.nome ?? 'Professor'}</span>
@@ -184,7 +184,7 @@ export default function FeedbackTurmaPage() {
 
       <div className="space-y-6">
         {/* Nota grande */}
-        <div className="border border-black rounded p-8 text-center">
+        <div className="border border-border rounded p-8 text-center">
           <p className="text-xs uppercase tracking-wider text-neutral-600 mb-2">Sua nota</p>
           <div className="text-6xl font-bold text-green leading-none">
             {nota.toFixed(1)}
@@ -192,7 +192,7 @@ export default function FeedbackTurmaPage() {
           </div>
           <p className="text-sm text-neutral-600 mt-2">{mensagemNota(nota)}</p>
 
-          <div className="mt-6 h-3 border border-black rounded overflow-hidden">
+          <div className="mt-6 h-3 border border-border rounded overflow-hidden">
             <motion.div
               className="h-full bg-green"
               initial={{ width: 0 }}
@@ -202,7 +202,7 @@ export default function FeedbackTurmaPage() {
           </div>
 
           {typeof resposta.xpGanho === 'number' && resposta.xpGanho > 0 && (
-            <div className="mt-6 inline-flex items-center gap-2 bg-black text-white rounded px-4 h-10 font-bold">
+            <div className="mt-6 inline-flex items-center gap-2 bg-foreground text-background rounded px-4 h-10 font-bold">
               +{resposta.xpGanho} XP
             </div>
           )}
@@ -217,7 +217,7 @@ export default function FeedbackTurmaPage() {
         />
 
         {/* Resposta original */}
-        <div className="border border-black rounded p-6">
+        <div className="border border-border rounded p-6">
           <h3 className="flex items-center gap-2 text-sm font-bold mb-3">
             <FileText className="h-4 w-4" /> Sua resposta original
           </h3>
@@ -225,7 +225,7 @@ export default function FeedbackTurmaPage() {
         </div>
 
         {/* Voltar */}
-        <div className="border-t border-black pt-6 flex flex-wrap gap-4">
+        <div className="border-t border-border pt-6 flex flex-wrap gap-4">
           <Link href={`/turmas/${id}`}>
             <Button variant="outline">
               <ArrowLeft className="h-4 w-4" /> Voltar para a turma

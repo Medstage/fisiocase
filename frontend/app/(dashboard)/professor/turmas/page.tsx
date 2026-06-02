@@ -30,7 +30,7 @@ function CodigoBadge({ codigo, large = false }: { codigo: string; large?: boolea
       type="button"
       onClick={copiar}
       title="Clique para copiar"
-      className={`inline-flex items-center gap-2 rounded bg-black text-white font-bold tracking-widest ${
+      className={`inline-flex items-center gap-2 rounded bg-foreground text-background font-bold tracking-widest ${
         large ? 'text-2xl px-6 py-3' : 'text-sm px-3 py-1.5'
       }`}
     >
@@ -120,7 +120,7 @@ export default function ProfessorTurmasPage() {
                 key={t.id}
                 whileHover={{ borderColor: '#0F4D0F', y: -2 }}
                 transition={{ duration: 0.2 }}
-                className="border border-black rounded p-5 bg-white flex flex-col"
+                className="border border-border rounded p-5 bg-card flex flex-col"
               >
                 <h3 className="text-lg font-bold mb-1">{t.nome}</h3>
                 {t.descricao && (
@@ -145,7 +145,7 @@ export default function ProfessorTurmasPage() {
                   <button
                     onClick={() => { setExcluirAlvo(t); setConfirmacaoNome(''); }}
                     aria-label="Excluir turma"
-                    className="inline-flex items-center justify-center border border-destructive text-destructive h-9 w-9 rounded hover:bg-destructive hover:text-white transition-colors"
+                    className="inline-flex items-center justify-center border border-destructive text-destructive h-9 w-9 rounded hover:bg-destructive hover:text-background transition-colors"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -156,7 +156,7 @@ export default function ProfessorTurmasPage() {
         )}
 
         {/* Seção arquivadas */}
-        <div className="mt-10 border-t border-black pt-6">
+        <div className="mt-10 border-t border-border pt-6">
           <button
             onClick={() => setArquivadasAbertas((v) => !v)}
             className="w-full flex items-center justify-between text-left py-2"
@@ -184,8 +184,8 @@ export default function ProfessorTurmasPage() {
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 opacity-60">
                       {(arquivadasQ.data?.turmas ?? []).map((t) => (
-                        <div key={t.id} className="border border-black rounded p-5 bg-neutral-50 flex flex-col">
-                          <span className="inline-block border border-black rounded px-2 py-0.5 text-[10px] font-bold uppercase mb-2 w-max">Arquivada</span>
+                        <div key={t.id} className="border border-border rounded p-5 bg-neutral-50 flex flex-col">
+                          <span className="inline-block border border-border rounded px-2 py-0.5 text-[10px] font-bold uppercase mb-2 w-max">Arquivada</span>
                           <h3 className="text-lg font-bold mb-1">{t.nome}</h3>
                           {t.descricao && <p className="text-sm text-neutral-600 line-clamp-2">{t.descricao}</p>}
                           <p className="text-xs text-neutral-500 mt-2">Código: {t.codigo}</p>
@@ -206,7 +206,7 @@ export default function ProfessorTurmasPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-foreground/40 z-50 flex items-center justify-center p-4"
               onClick={() => setCriarAberto(false)}
             >
               <motion.div
@@ -214,7 +214,7 @@ export default function ProfessorTurmasPage() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white border border-black rounded w-full max-w-md p-6"
+                className="bg-card border border-border rounded w-full max-w-md p-6"
               >
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-lg font-bold">Nova turma</h2>
@@ -236,7 +236,7 @@ export default function ProfessorTurmasPage() {
                     onChange={(e) => setDescricao(e.target.value)}
                   />
                 </div>
-                {erro && <p className="text-sm text-red-600 font-bold mb-3">{erro}</p>}
+                {erro && <p className="text-sm text-destructive font-bold mb-3">{erro}</p>}
                 <div className="flex gap-2 justify-end">
                   <Button variant="outline" size="sm" onClick={() => setCriarAberto(false)}>Cancelar</Button>
                   <Button
@@ -263,7 +263,7 @@ export default function ProfessorTurmasPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-foreground/40 z-50 flex items-center justify-center p-4"
               onClick={() => setTurmaCriada(null)}
             >
               <motion.div
@@ -271,7 +271,7 @@ export default function ProfessorTurmasPage() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white border border-black rounded w-full max-w-md p-6 text-center"
+                className="bg-card border border-border rounded w-full max-w-md p-6 text-center"
               >
                 <Check className="h-10 w-10 mx-auto text-green mb-2" />
                 <h2 className="text-lg font-bold mb-1">Turma criada</h2>
@@ -300,14 +300,14 @@ export default function ProfessorTurmasPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => { setExcluirAlvo(null); setConfirmacaoNome(''); }}
-              className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"
+              className="fixed inset-0 z-50 bg-foreground/60 flex items-center justify-center p-4"
             >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white border border-black rounded p-6 max-w-md w-full"
+                className="bg-card border border-border rounded p-6 max-w-md w-full"
               >
                 <h3 className="text-lg font-bold mb-2">Excluir turma</h3>
                 <div className="bg-yellow-50 border border-yellow-500 rounded p-3 mb-4">

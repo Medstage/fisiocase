@@ -6,8 +6,8 @@ import { DIFICULDADE_LABEL } from '@/lib/constants';
 type BadgeVariant = 'outline' | 'solid' | 'green';
 
 const variants: Record<BadgeVariant, string> = {
-  outline: 'border border-black text-black',
-  solid: 'bg-black text-white',
+  outline: 'border border-border text-foreground',
+  solid: 'bg-foreground text-background',
   green: 'border border-green text-green',
 };
 

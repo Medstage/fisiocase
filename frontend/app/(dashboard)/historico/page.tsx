@@ -113,19 +113,19 @@ export default function HistoricoPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="border border-black rounded p-4">
+        <div className="border border-border rounded p-4">
           <p className="text-xs uppercase tracking-wider text-neutral-600">Total</p>
           <p className="text-2xl font-bold">{stats.total}</p>
         </div>
-        <div className="border border-black rounded p-4">
+        <div className="border border-border rounded p-4">
           <p className="text-xs uppercase tracking-wider text-neutral-600">Média</p>
           <p className="text-2xl font-bold">{stats.media}<span className="text-base text-neutral-500">/100</span></p>
         </div>
-        <div className="border border-black rounded p-4">
+        <div className="border border-border rounded p-4">
           <p className="text-xs uppercase tracking-wider text-neutral-600">Maior nota</p>
           <p className="text-2xl font-bold text-green">{stats.maior}</p>
         </div>
-        <div className="border border-black rounded p-4">
+        <div className="border border-border rounded p-4">
           <p className="text-xs uppercase tracking-wider text-neutral-600">Melhor área</p>
           <p className="text-lg font-bold truncate">{stats.melhorArea ? AREA_LABEL[stats.melhorArea] : '—'}</p>
         </div>
@@ -140,8 +140,8 @@ export default function HistoricoPage() {
               type="button"
               onClick={() => setFiltroOrigem(value)}
               className={cn(
-                'inline-flex items-center gap-1.5 px-3 h-9 rounded border border-black text-xs font-bold uppercase transition-all active:scale-[0.98]',
-                filtroOrigem === value ? 'bg-black text-white' : 'bg-white text-black hover:bg-neutral-100',
+                'inline-flex items-center gap-1.5 px-3 h-9 rounded border border-border text-xs font-bold uppercase transition-all active:scale-[0.98]',
+                filtroOrigem === value ? 'bg-foreground text-background' : 'bg-background text-foreground hover:bg-neutral-100',
               )}
             >
               <Icon className="h-3.5 w-3.5" /> {label}
@@ -152,14 +152,14 @@ export default function HistoricoPage() {
           <select
             value={filtroArea}
             onChange={(e) => setFiltroArea(e.target.value as Area | 'todas')}
-            className="appearance-none border border-black rounded pl-3 pr-9 h-9 text-sm bg-white cursor-pointer focus:outline-none focus:border-green transition-colors"
+            className="appearance-none border border-border rounded pl-3 pr-9 h-9 text-sm bg-card cursor-pointer focus:outline-none focus:border-brand transition-colors"
           >
             <option value="todas">Todas as áreas</option>
             {(Object.entries(AREA_LABEL) as [Area, string][]).map(([v, l]) => (
               <option key={v} value={v}>{l}</option>
             ))}
           </select>
-          <ChevronDown className="h-4 w-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-black" />
+          <ChevronDown className="h-4 w-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-foreground" />
         </div>
       </div>
 
@@ -181,7 +181,7 @@ export default function HistoricoPage() {
                 <motion.div
                   whileHover={{ borderColor: '#0F4D0F', y: -2 }}
                   transition={{ duration: 0.2 }}
-                  className="border border-black rounded p-4 bg-white"
+                  className="border border-border rounded p-4 bg-card"
                 >
                   <div className="flex items-start justify-between gap-4 mb-2 flex-wrap">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -214,7 +214,7 @@ export default function HistoricoPage() {
                     {!pendente && <span className="font-bold text-green">+{item.xpGanho} XP</span>}
                     {/* Barra de progresso */}
                     {item.nota !== null && (
-                      <div className="flex-1 min-w-[100px] h-1 border border-black rounded overflow-hidden">
+                      <div className="flex-1 min-w-[100px] h-1 border border-border rounded overflow-hidden">
                         <div className="h-full bg-green" style={{ width: `${item.nota}%` }} />
                       </div>
                     )}

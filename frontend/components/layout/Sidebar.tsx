@@ -87,7 +87,7 @@ export function Sidebar({ usuario }: { usuario?: Partial<Usuario> }) {
         className={cn(
           'flex items-center h-11 rounded transition-colors',
           compact ? 'w-11 justify-center mx-auto' : 'gap-3 px-4',
-          ativo ? 'bg-black text-white' : 'text-black hover:bg-neutral-100',
+          ativo ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-accent',
         )}
       >
         <Icon className="h-5 w-5 shrink-0" />
@@ -99,7 +99,7 @@ export function Sidebar({ usuario }: { usuario?: Partial<Usuario> }) {
   const Conteudo = ({ compact, mobile }: { compact: boolean; mobile: boolean }) => (
     <>
       {/* Logo + colapsar (mobile mostra X) */}
-      <div className="flex items-center justify-between h-16 px-4 border-b border-black">
+      <div className="flex items-center justify-between h-16 px-4 border-b border-border">
         {!compact && <span className="font-bold text-lg">FisioCase</span>}
         <button
           onClick={mobile ? () => setMobileOpen(false) : toggleCollapsed}
@@ -115,8 +115,8 @@ export function Sidebar({ usuario }: { usuario?: Partial<Usuario> }) {
       </div>
 
       {/* Perfil resumido */}
-      <div className={cn('flex items-center gap-3 px-4 py-4 border-b border-black', compact && 'justify-center px-0')}>
-        <div className="h-9 w-9 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold">
+      <div className={cn('flex items-center gap-3 px-4 py-4 border-b border-border', compact && 'justify-center px-0')}>
+        <div className="h-9 w-9 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-bold">
           {inicial}
         </div>
         {!compact && (
@@ -138,13 +138,13 @@ export function Sidebar({ usuario }: { usuario?: Partial<Usuario> }) {
       </nav>
 
       {/* Rodapé */}
-      <div className="flex flex-col gap-1 p-3 border-t border-black">
+      <div className="flex flex-col gap-1 p-3 border-t border-border">
         <Item href="/configuracoes" label="Configurações" icon={Settings} compact={compact} />
         <button
           onClick={() => signOut({ callbackUrl: '/login' })}
           title={compact ? 'Sair' : undefined}
           className={cn(
-            'flex items-center h-11 rounded text-black hover:bg-neutral-100 transition-colors',
+            'flex items-center h-11 rounded text-foreground hover:bg-neutral-100 transition-colors',
             compact ? 'w-11 justify-center mx-auto' : 'gap-3 px-4',
           )}
         >
@@ -161,7 +161,7 @@ export function Sidebar({ usuario }: { usuario?: Partial<Usuario> }) {
       <motion.aside
         animate={{ width: collapsed ? 64 : 240 }}
         transition={{ duration: 0.25 }}
-        className="hidden md:flex flex-col shrink-0 border-r border-black bg-white h-screen sticky top-0"
+        className="hidden md:flex flex-col shrink-0 border-r border-border bg-card h-screen sticky top-0"
       >
         <Conteudo compact={collapsed} mobile={false} />
       </motion.aside>
@@ -176,14 +176,14 @@ export function Sidebar({ usuario }: { usuario?: Partial<Usuario> }) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18 }}
               onClick={() => setMobileOpen(false)}
-              className="md:hidden fixed inset-0 bg-black/50 z-40"
+              className="md:hidden fixed inset-0 bg-foreground/50 z-40"
             />
             <motion.aside
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.22 }}
-              className="md:hidden fixed top-0 left-0 bottom-0 w-[280px] bg-white border-r border-black z-50 flex flex-col"
+              className="md:hidden fixed top-0 left-0 bottom-0 w-[280px] bg-card border-r border-border z-50 flex flex-col"
             >
               <Conteudo compact={false} mobile />
             </motion.aside>

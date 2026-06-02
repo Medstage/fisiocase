@@ -51,7 +51,7 @@ export function ConquistaUnlocked({ conquistas, onClose }: { conquistas: Conquis
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[60] bg-black/60 flex items-center justify-center p-4 cursor-pointer"
+        className="fixed inset-0 z-[60] bg-foreground/60 flex items-center justify-center p-4 cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -59,7 +59,7 @@ export function ConquistaUnlocked({ conquistas, onClose }: { conquistas: Conquis
       >
         <motion.div
           key={atual.id}
-          className="relative bg-white border border-black rounded p-8 max-w-sm w-full text-center"
+          className="relative bg-card border border-border rounded p-8 max-w-sm w-full text-center"
           initial={{ scale: 0.8, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 260, damping: 20 }}
@@ -77,7 +77,7 @@ export function ConquistaUnlocked({ conquistas, onClose }: { conquistas: Conquis
               />
             ))}
             <motion.div
-              className={`h-20 w-20 rounded-full border-2 border-black bg-white flex items-center justify-center ${cor}`}
+              className={`h-20 w-20 rounded-full border-2 border-border bg-card flex items-center justify-center ${cor}`}
               initial={{ rotate: -25, scale: 0.6 }}
               animate={{ rotate: 0, scale: 1 }}
               transition={{ type: 'spring', stiffness: 200, damping: 12 }}
@@ -90,7 +90,7 @@ export function ConquistaUnlocked({ conquistas, onClose }: { conquistas: Conquis
           <h3 className="text-xl font-bold mb-2">{atual.titulo}</h3>
           {atual.descricao && <p className="text-sm text-neutral-600 mb-4">{atual.descricao}</p>}
           {atual.xpRecompensa ? (
-            <span className="inline-flex items-center bg-black text-white rounded px-3 h-8 text-sm font-bold">+{atual.xpRecompensa} XP</span>
+            <span className="inline-flex items-center bg-foreground text-background rounded px-3 h-8 text-sm font-bold">+{atual.xpRecompensa} XP</span>
           ) : null}
           <p className="text-xs text-neutral-400 mt-6">
             {conquistas.length > 1 ? `${idx + 1} de ${conquistas.length} · ` : ''}Toque para continuar

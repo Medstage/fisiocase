@@ -23,7 +23,7 @@ export function ProfessorGuard({ children }: { children: React.ReactNode }) {
 
   if (!ehProfessor(usuario?.role)) {
     return (
-      <div className="border border-black rounded p-8 bg-white flex items-center gap-3">
+      <div className="border border-border rounded p-8 bg-card flex items-center gap-3">
         <ShieldAlert className="h-5 w-5 shrink-0" />
         <p className="text-sm font-bold">Acesso restrito a professores.</p>
       </div>

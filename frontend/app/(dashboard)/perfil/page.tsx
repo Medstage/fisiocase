@@ -21,9 +21,9 @@ interface Estatisticas {
   mediaGeral: number;
 }
 
-function StatCard({ label, icon: Icon, iconColor = 'text-black', children }: { label: string; icon: typeof Star; iconColor?: string; children: React.ReactNode }) {
+function StatCard({ label, icon: Icon, iconColor = 'text-foreground', children }: { label: string; icon: typeof Star; iconColor?: string; children: React.ReactNode }) {
   return (
-    <motion.div whileHover={{ borderColor: '#0F4D0F', y: -2 }} transition={{ duration: 0.2 }} className="border border-black rounded p-6 min-h-[120px] flex flex-col justify-between">
+    <motion.div whileHover={{ borderColor: '#0F4D0F', y: -2 }} transition={{ duration: 0.2 }} className="border border-border rounded p-6 min-h-[120px] flex flex-col justify-between">
       <div className="flex justify-between items-start">
         <span className="text-xs font-bold uppercase tracking-wider text-neutral-600">{label}</span>
         <Icon className={`h-4 w-4 ${iconColor}`} />
@@ -62,8 +62,8 @@ export default function PerfilPage() {
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className="flex flex-col gap-6">
       {/* Header do perfil */}
-      <section className="border border-black rounded p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 relative">
-        <div className="h-20 w-20 shrink-0 rounded-full border border-black bg-black text-white flex items-center justify-center text-3xl font-bold">
+      <section className="border border-border rounded p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 relative">
+        <div className="h-20 w-20 shrink-0 rounded-full border border-border bg-foreground text-background flex items-center justify-center text-3xl font-bold">
           {usuario.nome.charAt(0).toUpperCase()}
         </div>
         <div className="flex flex-col text-center sm:text-left gap-1 flex-1 min-w-0">
@@ -87,10 +87,10 @@ export default function PerfilPage() {
         <StatCard label="Casos resolvidos" icon={CheckCircle2} iconColor="text-green">
           <AnimatedNumber value={stats?.totalCasos ?? 0} format={false} />
         </StatCard>
-        <StatCard label="Total XP" icon={Star} iconColor="text-amber-500">
+        <StatCard label="Total XP" icon={Star} iconColor="text-warning">
           <AnimatedNumber value={usuario.xpTotal ?? 0} />
         </StatCard>
-        <StatCard label="Maior sequência" icon={Flame} iconColor="text-orange-500">
+        <StatCard label="Maior sequência" icon={Flame} iconColor="text-warning">
           <AnimatedNumber value={stats?.maiorSequencia ?? usuario.maiorSequencia ?? 0} format={false} />
           <span className="text-base font-normal text-neutral-600 ml-1">dias</span>
         </StatCard>
@@ -102,8 +102,8 @@ export default function PerfilPage() {
       {/* Gráficos */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Desempenho por área */}
-        <div className="border border-black rounded p-6">
-          <h3 className="text-lg font-bold mb-4 pb-3 border-b border-black">Casos por área</h3>
+        <div className="border border-border rounded p-6">
+          <h3 className="text-lg font-bold mb-4 pb-3 border-b border-border">Casos por área</h3>
           <div className="flex flex-col gap-4">
             {areas.length === 0 && <p className="text-sm text-neutral-500">Resolva casos para ver seu desempenho por área.</p>}
             {areas.map((a) => {
@@ -114,8 +114,8 @@ export default function PerfilPage() {
                     <span>{AREA_LABEL[a.area] ?? a.area}</span>
                     <span>{a.total}</span>
                   </div>
-                  <div className="h-6 w-full border border-black bg-surface relative">
-                    <motion.div className="absolute top-0 left-0 h-full bg-black" initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.8, ease: 'easeOut' }} />
+                  <div className="h-6 w-full border border-border bg-surface relative">
+                    <motion.div className="absolute top-0 left-0 h-full bg-foreground" initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.8, ease: 'easeOut' }} />
                   </div>
                 </div>
               );
@@ -124,10 +124,10 @@ export default function PerfilPage() {
         </div>
 
         {/* Evolução semanal */}
-        <div className="border border-black rounded p-6">
-          <div className="flex justify-between items-center mb-4 pb-3 border-b border-black">
+        <div className="border border-border rounded p-6">
+          <div className="flex justify-between items-center mb-4 pb-3 border-b border-border">
             <h3 className="text-lg font-bold">Evolução semanal (XP)</h3>
-            <span className="text-xs font-bold border border-black px-2 py-1 rounded">Últimas semanas</span>
+            <span className="text-xs font-bold border border-border px-2 py-1 rounded">Últimas semanas</span>
           </div>
           {evolucao.length === 0 ? (
             <p className="text-sm text-neutral-500">Sem dados ainda.</p>

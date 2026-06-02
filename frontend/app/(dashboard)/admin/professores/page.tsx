@@ -71,8 +71,8 @@ export default function AdminProfessoresPage() {
           Nenhum professor cadastrado ainda.
         </div>
       ) : (
-        <div className="border border-black rounded overflow-hidden">
-          <div className="grid grid-cols-[1fr_180px_120px_120px_120px_100px] gap-2 px-4 py-2 border-b border-black text-[10px] uppercase tracking-wider text-neutral-600 font-bold">
+        <div className="border border-border rounded overflow-hidden">
+          <div className="grid grid-cols-[1fr_180px_120px_120px_120px_100px] gap-2 px-4 py-2 border-b border-border text-[10px] uppercase tracking-wider text-neutral-600 font-bold">
             <span>Nome / Email</span>
             <span>Instituição</span>
             <span className="text-center">Turmas</span>
@@ -99,7 +99,7 @@ export default function AdminProfessoresPage() {
                   <span className="text-xs text-neutral-600">{formatarData(p.createdAt)}</span>
                   <button
                     onClick={() => setRevogarAlvo(p)}
-                    className="inline-flex items-center gap-1 border border-destructive text-destructive px-2 h-8 rounded text-xs font-bold hover:bg-destructive hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1 border border-destructive text-destructive px-2 h-8 rounded text-xs font-bold hover:bg-destructive hover:text-background transition-colors"
                   >
                     <UserMinus className="h-3 w-3" /> Revogar
                   </button>
@@ -125,13 +125,13 @@ export default function AdminProfessoresPage() {
       {revogarAlvo && (
         <div
           onClick={() => setRevogarAlvo(null)}
-          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-foreground/60 flex items-center justify-center p-4"
         >
           <motion.div
             onClick={(e) => e.stopPropagation()}
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white border border-black rounded p-6 max-w-md w-full"
+            className="bg-card border border-border rounded p-6 max-w-md w-full"
           >
             <h3 className="text-lg font-bold mb-2">Revogar acesso de professor</h3>
             <p className="text-sm text-neutral-600 mb-4">
@@ -194,32 +194,32 @@ function AdicionarModal({
   });
 
   return (
-    <div onClick={onClose} className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+    <div onClick={onClose} className="fixed inset-0 z-50 bg-foreground/60 flex items-center justify-center p-4">
       <motion.div
         onClick={(e) => e.stopPropagation()}
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white border border-black rounded p-6 max-w-md w-full"
+        className="bg-card border border-border rounded p-6 max-w-md w-full"
       >
         <div className="flex items-start justify-between mb-4">
           <h3 className="text-lg font-bold">Adicionar professor</h3>
-          <button onClick={onClose} className="p-1 border border-black rounded hover:bg-black hover:text-white">
+          <button onClick={onClose} className="p-1 border border-border rounded hover:bg-foreground hover:text-background">
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="flex gap-2 mb-4 border border-black rounded p-1">
+        <div className="flex gap-2 mb-4 border border-border rounded p-1">
           <button
             type="button"
             onClick={() => setModo('promover')}
-            className={`flex-1 px-3 h-9 text-xs font-bold uppercase rounded ${modo === 'promover' ? 'bg-black text-white' : ''}`}
+            className={`flex-1 px-3 h-9 text-xs font-bold uppercase rounded ${modo === 'promover' ? 'bg-foreground text-background' : ''}`}
           >
             Promover existente
           </button>
           <button
             type="button"
             onClick={() => setModo('criar')}
-            className={`flex-1 px-3 h-9 text-xs font-bold uppercase rounded ${modo === 'criar' ? 'bg-black text-white' : ''}`}
+            className={`flex-1 px-3 h-9 text-xs font-bold uppercase rounded ${modo === 'criar' ? 'bg-foreground text-background' : ''}`}
           >
             Criar novo
           </button>
@@ -227,7 +227,7 @@ function AdicionarModal({
 
         {modo === 'promover' ? (
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border border-black rounded px-3 h-10">
+            <div className="flex items-center gap-2 border border-border rounded px-3 h-10">
               <Search className="h-4 w-4 text-neutral-600" />
               <input
                 value={emailBusca}
@@ -237,7 +237,7 @@ function AdicionarModal({
               />
             </div>
             {emailBusca.length >= 2 && (
-              <div className="border border-black rounded max-h-48 overflow-y-auto">
+              <div className="border border-border rounded max-h-48 overflow-y-auto">
                 {buscaQ.isLoading ? (
                   <p className="p-3 text-sm text-neutral-500">Buscando...</p>
                 ) : (buscaQ.data?.usuarios ?? []).length === 0 ? (

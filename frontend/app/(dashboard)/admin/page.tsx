@@ -68,7 +68,7 @@ export default function AdminPage() {
                       <motion.div
                         whileHover={{ borderColor: '#0F4D0F', y: -2 }}
                         transition={{ duration: 0.2 }}
-                        className="border border-black rounded p-6 bg-white flex items-center justify-between"
+                        className="border border-border rounded p-6 bg-card flex items-center justify-between"
                       >
                         <span className="font-bold">{a.label}</span>
                         <ArrowRight className="h-4 w-4" />
@@ -80,7 +80,7 @@ export default function AdminPage() {
 
               <section>
                 <h2 className="text-lg font-bold mb-4">Top usuários (XP)</h2>
-                <div className="border border-black rounded bg-white divide-y divide-black">
+                <div className="border border-border rounded bg-card divide-y divide-black">
                   {(data?.topUsuarios ?? []).length === 0 && (
                     <p className="p-4 text-sm text-neutral-500">Nenhum usuário ainda.</p>
                   )}
@@ -101,7 +101,7 @@ export default function AdminPage() {
 
             <section className="mt-8">
               <h2 className="text-lg font-bold mb-4">Casos por área</h2>
-              <div className="border border-black rounded bg-white divide-y divide-black">
+              <div className="border border-border rounded bg-card divide-y divide-black">
                 {(data?.casosPorArea ?? []).length === 0 && (
                   <p className="p-4 text-sm text-neutral-500">Nenhum caso cadastrado.</p>
                 )}

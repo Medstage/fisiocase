@@ -91,7 +91,7 @@ export default function ResolverCasoTurmaPage() {
         <Link
           href={`/turmas/${id}`}
           aria-label="Voltar para turma"
-          className="border border-black p-2 hover:bg-black hover:text-white transition-colors rounded"
+          className="border border-border p-2 hover:bg-foreground hover:text-background transition-colors rounded"
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>
@@ -105,8 +105,8 @@ export default function ResolverCasoTurmaPage() {
 
       {/* Aviso para resposta já enviada */}
       {jaEnviou && (
-        <div className="mb-4 border border-black border-l-4 border-l-amber-500 rounded p-4 flex items-start gap-3">
-          <Info className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+        <div className="mb-4 border border-border border-l-4 border-l-amber-500 rounded p-4 flex items-start gap-3">
+          <Info className="h-5 w-5 text-warning shrink-0 mt-0.5" />
           <p className="text-sm">
             {pendente
               ? 'Você já enviou sua resposta. Aguarde a correção do professor.'
@@ -116,22 +116,22 @@ export default function ResolverCasoTurmaPage() {
       )}
 
       {encerrado && !jaEnviou && (
-        <div className="mb-4 border border-black border-l-4 border-l-neutral-400 rounded p-4 flex items-start gap-3">
+        <div className="mb-4 border border-border border-l-4 border-l-neutral-400 rounded p-4 flex items-start gap-3">
           <Info className="h-5 w-5 text-neutral-500 shrink-0 mt-0.5" />
           <p className="text-sm">Este caso foi encerrado pelo professor e não aceita mais respostas.</p>
         </div>
       )}
 
       {/* Split layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] border border-black rounded overflow-hidden min-h-[calc(100vh-12rem)]">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] border border-border rounded overflow-hidden min-h-[calc(100vh-12rem)]">
         {/* Painel esquerdo: detalhes do caso */}
-        <div className="border-b lg:border-b-0 lg:border-r border-black p-6 overflow-y-auto">
+        <div className="border-b lg:border-b-0 lg:border-r border-border p-6 overflow-y-auto">
           <CasoViewer caso={casoTurma.caso} />
         </div>
 
         {/* Painel direito: resposta */}
         <div className="flex flex-col">
-          <div className="h-14 shrink-0 border-b border-black flex items-center justify-between px-6">
+          <div className="h-14 shrink-0 border-b border-border flex items-center justify-between px-6">
             <h2 className="text-lg font-bold">Sua resposta</h2>
             <span className="text-xs uppercase tracking-wider text-neutral-600">
               Correção manual do professor
@@ -153,7 +153,7 @@ export default function ResolverCasoTurmaPage() {
             )}
           </div>
 
-          <div className="shrink-0 border-t border-black p-6 flex justify-between items-center gap-4">
+          <div className="shrink-0 border-t border-border p-6 flex justify-between items-center gap-4">
             <span className="text-sm text-neutral-600">
               {jaEnviou ? (
                 <span className="inline-flex items-center gap-2 text-green font-bold">

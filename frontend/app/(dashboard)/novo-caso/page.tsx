@@ -37,9 +37,9 @@ function Chip({ selected, onClick, children, full }: { selected: boolean; onClic
       type="button"
       onClick={onClick}
       className={cn(
-        'border border-black rounded px-4 py-3 text-sm font-bold uppercase tracking-wide text-left transition-all active:scale-[0.98]',
+        'border border-border rounded px-4 py-3 text-sm font-bold uppercase tracking-wide text-left transition-all active:scale-[0.98]',
         full && 'w-full sm:w-[calc(50%-4px)]',
-        selected ? 'bg-black text-white' : 'bg-white text-black hover:bg-neutral-100',
+        selected ? 'bg-foreground text-background' : 'bg-background text-foreground hover:bg-neutral-100',
       )}
     >
       {children}
@@ -49,15 +49,15 @@ function Chip({ selected, onClick, children, full }: { selected: boolean; onClic
 
 function LoaderView() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[380px] border border-black rounded p-12">
+    <div className="flex flex-col items-center justify-center min-h-[380px] border border-border rounded p-12">
       <h3 className="text-2xl font-bold text-center mb-8">Sintetizando dados clínicos...</h3>
       <div className="w-full max-w-[400px] space-y-4">
-        <div className="h-6 border border-black rounded animate-pulse" />
-        <div className="h-3 w-3/4 border border-black rounded animate-pulse" style={{ animationDelay: '0.15s' }} />
-        <div className="h-3 w-5/6 border border-black rounded animate-pulse" style={{ animationDelay: '0.3s' }} />
+        <div className="h-6 border border-border rounded animate-pulse" />
+        <div className="h-3 w-3/4 border border-border rounded animate-pulse" style={{ animationDelay: '0.15s' }} />
+        <div className="h-3 w-5/6 border border-border rounded animate-pulse" style={{ animationDelay: '0.3s' }} />
         <div className="flex gap-4 pt-4">
-          <div className="h-10 w-1/2 border border-black rounded animate-pulse" style={{ animationDelay: '0.1s' }} />
-          <div className="h-10 w-1/2 border border-black rounded animate-pulse" style={{ animationDelay: '0.25s' }} />
+          <div className="h-10 w-1/2 border border-border rounded animate-pulse" style={{ animationDelay: '0.1s' }} />
+          <div className="h-10 w-1/2 border border-border rounded animate-pulse" style={{ animationDelay: '0.25s' }} />
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@ function WizardIA() {
                       key={d.value}
                       type="button"
                       onClick={() => { setDificuldade(d.value); avancar(); }}
-                      className={cn('border border-black rounded p-4 text-left transition-all active:scale-[0.99] flex flex-col gap-1', sel ? 'bg-black text-white' : 'bg-white hover:bg-neutral-100')}
+                      className={cn('border border-border rounded p-4 text-left transition-all active:scale-[0.99] flex flex-col gap-1', sel ? 'bg-foreground text-background' : 'bg-card hover:bg-neutral-100')}
                     >
                       <span className="text-xs font-bold uppercase tracking-wide">{d.label}</span>
                       <span className={cn('text-sm', sel ? 'text-neutral-300' : 'text-neutral-600')}>{d.desc}</span>
@@ -158,7 +158,7 @@ function WizardIA() {
 
       {erro && <p className="text-sm text-destructive font-bold mt-4">{erro}</p>}
 
-      <div className="border-t border-black pt-6 mt-6 flex items-center justify-between gap-4">
+      <div className="border-t border-border pt-6 mt-6 flex items-center justify-between gap-4">
         <Button variant="outline" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0} className="gap-2">
           <ArrowLeft className="h-4 w-4" /> Voltar
         </Button>
@@ -184,7 +184,7 @@ export default function NovoCasoPage() {
       onClick={() => setAba(id)}
       className={cn(
         'inline-flex items-center gap-2 px-1 pb-3 text-sm font-bold uppercase tracking-wide border-b-2 transition-colors',
-        aba === id ? 'border-green text-black' : 'border-transparent text-neutral-500 hover:text-black',
+        aba === id ? 'border-green text-foreground' : 'border-transparent text-neutral-500 hover:text-foreground',
       )}
     >
       <Icon className="h-4 w-4" /> {label}
@@ -193,19 +193,19 @@ export default function NovoCasoPage() {
 
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className={cn(aba === 'gerar' ? 'max-w-3xl mx-auto' : 'max-w-6xl mx-auto')}>
-      <header className="mb-6 pb-4 border-b border-black flex items-start justify-between gap-4">
+      <header className="mb-6 pb-4 border-b border-border flex items-start justify-between gap-4">
         <div>
           <h1 className="text-[28px] sm:text-[32px] font-bold tracking-[-0.02em]">Novo caso clínico</h1>
           <p className="text-sm text-neutral-600 mt-1">
             {aba === 'gerar' ? 'A IA gera um caso original com seus filtros.' : 'Escolha um caso já publicado para resolver.'}
           </p>
         </div>
-        <Link href="/dashboard" aria-label="Voltar" className="border border-black p-2 hover:bg-black hover:text-white transition-colors rounded shrink-0">
+        <Link href="/dashboard" aria-label="Voltar" className="border border-border p-2 hover:bg-foreground hover:text-background transition-colors rounded shrink-0">
           <X className="h-5 w-5" />
         </Link>
       </header>
 
-      <nav className="flex gap-6 mb-6 border-b border-black">
+      <nav className="flex gap-6 mb-6 border-b border-border">
         <Aba id="gerar" label="Gerar com IA" Icon={Sparkles} />
         <Aba id="escolher" label="Escolher caso" Icon={Library} />
       </nav>

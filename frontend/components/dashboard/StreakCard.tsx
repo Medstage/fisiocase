@@ -23,7 +23,7 @@ export function StreakCard({ sequenciaAtual, maiorSequencia, protetoresStreak, r
     <motion.div
       whileHover={{ borderColor: '#0F4D0F', y: -2 }}
       transition={{ duration: 0.2 }}
-      className="border border-black rounded p-6 bg-white flex flex-col gap-3"
+      className="border border-border rounded p-6 bg-card flex flex-col gap-3"
     >
       <div className="flex items-start justify-between">
         <div className="flex flex-col">
@@ -45,7 +45,7 @@ export function StreakCard({ sequenciaAtual, maiorSequencia, protetoresStreak, r
             <span>Próximo nível</span>
             <span>{n.diasParaProximo} dia{n.diasParaProximo === 1 ? '' : 's'}</span>
           </div>
-          <div className="h-1.5 border border-black rounded overflow-hidden">
+          <div className="h-1.5 border border-border rounded overflow-hidden">
             <motion.div
               className="h-full bg-green"
               initial={{ width: 0 }}
@@ -67,7 +67,7 @@ export function StreakCard({ sequenciaAtual, maiorSequencia, protetoresStreak, r
           animate={{ opacity: [0.55, 1, 0.55] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <Target className="h-4 w-4 text-orange-500" />
+          <Target className="h-4 w-4 text-warning" />
           <span className="font-bold">Resolva um caso para manter sua chama</span>
         </motion.div>
       )}

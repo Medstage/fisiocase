@@ -3,35 +3,120 @@
 @tailwind utilities;
 
 @layer base {
+  /* ───── Tema CLARO (Clínico equilibrado) ───── */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    /* Fundos e superfícies */
+    --background: 96 22% 98%;          /* #FAFBF7 branco-quente */
+    --foreground: 124 30% 12%;         /* #14281A verde-grafite (texto) */
+    --card: 0 0% 100%;                 /* #FFFFFF cards puro */
+    --card-foreground: 124 30% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 120 67% 18%; /* #0F4D0F */
+    --popover-foreground: 124 30% 12%;
+
+    /* Verde fisio: brand */
+    --primary: 120 67% 18%;            /* #0F4D0F verde escuro */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 89%; /* #e2e2e2 */
-    --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 93%; /* #eeeeee */
-    --muted-foreground: 0 0% 35%;
-    --accent: 0 0% 93%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 75% 42%; /* #ba1a1a */
+
+    /* Verde vivo: acentos / badges desbloqueadas */
+    --brand: 122 39% 49%;              /* #4CAF50 verde-vivo */
+    --brand-foreground: 0 0% 100%;
+
+    /* Superfícies secundárias */
+    --secondary: 96 18% 94%;           /* #ECEFE8 verde-creme */
+    --secondary-foreground: 124 30% 12%;
+    --muted: 96 12% 95%;               /* #EFF1ED */
+    --muted-foreground: 124 8% 38%;    /* #5C645E */
+    --accent: 96 18% 92%;              /* #E5EAE1 */
+    --accent-foreground: 124 30% 12%;
+
+    /* Estados semânticos */
+    --info: 207 79% 51%;               /* #1E88E5 azul-clínico */
+    --info-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;             /* #F59E0B âmbar */
+    --warning-foreground: 124 30% 12%;
+    --success: 122 39% 49%;            /* #4CAF50 verde-vivo */
+    --success-foreground: 0 0% 100%;
+    --destructive: 0 75% 42%;          /* #BA1A1A */
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 0%;
-    --input: 0 0% 0%;
-    --ring: 120 67% 18%;
-    --radius: 0.25rem; /* 4px */
+
+    /* Bordas e inputs */
+    --border: 110 14% 86%;             /* #DAE1D6 borda-suave */
+    --input: 110 14% 86%;
+    --ring: 122 39% 49%;               /* foco em verde-vivo */
+    --radius: 0.25rem;
+  }
+
+  /* ───── Tema ESCURO ───── */
+  .dark {
+    --background: 130 30% 7%;          /* #0F1A0F verde-grafite */
+    --foreground: 90 8% 92%;           /* #E8EBE6 texto claro */
+    --card: 130 20% 11%;               /* #1A2A1A card escuro */
+    --card-foreground: 90 8% 92%;
+    --popover: 130 20% 11%;
+    --popover-foreground: 90 8% 92%;
+
+    --primary: 122 39% 56%;            /* #66BB6A verde vibrante (mais visível no escuro) */
+    --primary-foreground: 124 60% 8%;
+
+    --brand: 122 50% 65%;              /* #7BD17F */
+    --brand-foreground: 124 60% 8%;
+
+    --secondary: 130 15% 16%;          /* #232E22 */
+    --secondary-foreground: 90 8% 92%;
+    --muted: 130 12% 18%;              /* #283328 */
+    --muted-foreground: 90 6% 62%;     /* #969C95 */
+    --accent: 130 15% 18%;             /* #2A352A */
+    --accent-foreground: 90 8% 92%;
+
+    --info: 207 90% 65%;               /* #64B5F6 */
+    --info-foreground: 207 100% 8%;
+    --warning: 38 95% 60%;             /* #FBBF44 */
+    --warning-foreground: 38 60% 8%;
+    --success: 122 50% 65%;
+    --success-foreground: 124 60% 8%;
+    --destructive: 0 70% 60%;          /* #D94747 mais legível no escuro */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 130 14% 22%;             /* #2F3D2F */
+    --input: 130 14% 22%;
+    --ring: 122 50% 65%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
     @apply bg-background text-foreground;
   }
 }
+
+/* ───── Suporte legado: classes neutral-* tem equivalente escuro ─────
+   Evita refatorar 310 ocorrências de text-neutral-XXX.
+   Light → continua usando a paleta Tailwind padrão.
+   Dark → invertemos pra tons mais claros equivalentes. */
+.dark .text-neutral-300 { color: hsl(var(--muted-foreground)); }
+.dark .text-neutral-400 { color: hsl(var(--muted-foreground)); }
+.dark .text-neutral-500 { color: hsl(var(--muted-foreground)); }
+.dark .text-neutral-600 { color: hsl(var(--muted-foreground)); }
+.dark .text-neutral-700 { color: hsl(var(--foreground)); }
+.dark .text-neutral-800 { color: hsl(var(--foreground)); }
+.dark .text-neutral-900 { color: hsl(var(--foreground)); }
+
+.dark .bg-neutral-50 { background-color: hsl(var(--accent)); }
+.dark .bg-neutral-100 { background-color: hsl(var(--accent)); }
+.dark .bg-neutral-200 { background-color: hsl(var(--muted)); }
+
+.dark .border-neutral-200 { border-color: hsl(var(--border)); }
+.dark .border-neutral-300 { border-color: hsl(var(--border)); }
+.dark .border-neutral-400 { border-color: hsl(var(--border)); }
+
+.dark .divide-neutral-200 > * + * { border-color: hsl(var(--border)); }
+
+/* Verde literal usado direto (bg-green, text-green, border-green) — adapta no dark
+   pra ficar visível contra o fundo escuro. */
+.dark .text-green { color: hsl(var(--brand)); }
+.dark .bg-green { background-color: hsl(var(--brand)); color: hsl(var(--brand-foreground)); }
+.dark .bg-green-soft { background-color: hsl(var(--accent)); }
+.dark .border-green { border-color: hsl(var(--brand)); }

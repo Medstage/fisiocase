@@ -21,8 +21,8 @@ export function RankingSemanal({
 }) {
   const lista = Array.isArray(itens) ? itens : [];
   return (
-    <div className="border border-black rounded overflow-hidden">
-      <div className="flex items-center justify-between px-4 h-12 border-b border-black">
+    <div className="border border-border rounded overflow-hidden">
+      <div className="flex items-center justify-between px-4 h-12 border-b border-border">
         <span className="text-xs uppercase tracking-wider text-neutral-600">{titulo}</span>
       </div>
       <div className="divide-y divide-neutral-200">
@@ -32,10 +32,10 @@ export function RankingSemanal({
           return (
             <div
               key={it.id}
-              className={cn('flex items-center justify-between px-4 py-2.5 text-sm', sou && 'bg-black text-white')}
+              className={cn('flex items-center justify-between px-4 py-2.5 text-sm', sou && 'bg-foreground text-background')}
             >
               <span className="flex items-center gap-3 min-w-0">
-                <span className={cn('w-5 text-center font-bold', sou ? 'text-white' : 'text-neutral-500')}>
+                <span className={cn('w-5 text-center font-bold', sou ? 'text-background' : 'text-neutral-500')}>
                   {it.posicao}
                 </span>
                 <span className="truncate">{sou ? 'Você' : it.nome}</span>

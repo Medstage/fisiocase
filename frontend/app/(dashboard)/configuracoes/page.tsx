@@ -13,19 +13,19 @@ import { Button } from '@/components/ui/button';
 function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
     <label className="flex items-center justify-between gap-4 cursor-pointer">
-      <span className="text-sm text-black">{label}</span>
+      <span className="text-sm text-foreground">{label}</span>
       <button
         type="button"
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative h-6 w-11 shrink-0 rounded-full border border-black transition-colors ${
-          checked ? 'bg-green' : 'bg-white'
+        className={`relative h-6 w-11 shrink-0 rounded-full border border-border transition-colors ${
+          checked ? 'bg-green' : 'bg-card'
         }`}
       >
         <span
           className={`absolute top-0.5 h-4 w-4 rounded-full transition-all ${
-            checked ? 'left-[22px] bg-white' : 'left-0.5 bg-black'
+            checked ? 'left-[22px] bg-card' : 'left-0.5 bg-foreground'
           }`}
         />
       </button>
@@ -123,7 +123,7 @@ export default function ConfiguracoesPage() {
 
       <div className="max-w-2xl space-y-8">
         {/* Senha */}
-        <section className="border border-black rounded p-6 bg-white">
+        <section className="border border-border rounded p-6 bg-card">
           <h2 className="text-lg font-bold mb-1">Senha</h2>
           <p className="text-sm text-neutral-600 mb-6">Atualize sua senha de acesso.</p>
           <form onSubmit={salvarSenha} className="space-y-6">
@@ -156,7 +156,7 @@ export default function ConfiguracoesPage() {
         </section>
 
         {/* Notificações */}
-        <section className="border border-black rounded p-6 bg-white">
+        <section className="border border-border rounded p-6 bg-card">
           <h2 className="text-lg font-bold mb-1">Notificações</h2>
           <p className="text-sm text-neutral-600 mb-6">Escolha como deseja ser avisado.</p>
           <div className="space-y-4">
@@ -172,7 +172,7 @@ export default function ConfiguracoesPage() {
         </section>
 
         {/* Privacidade */}
-        <section className="border border-black rounded p-6 bg-white">
+        <section className="border border-border rounded p-6 bg-card">
           <h2 className="text-lg font-bold mb-1">Privacidade</h2>
           <p className="text-sm text-neutral-600 mb-6">Controle a visibilidade do seu perfil.</p>
           <div className="space-y-4">
@@ -188,7 +188,7 @@ export default function ConfiguracoesPage() {
         </section>
 
         {/* Excluir conta */}
-        <section className="border border-black rounded p-6 bg-white">
+        <section className="border border-border rounded p-6 bg-card">
           <h2 className="text-lg font-bold mb-1">Excluir conta</h2>
           <p className="text-sm text-neutral-600 mb-6">
             Esta ação é permanente e remove todos os seus dados. Não pode ser desfeita.
@@ -200,7 +200,7 @@ export default function ConfiguracoesPage() {
               setErroExclusao('');
               setModalAberto(true);
             }}
-            className="bg-destructive text-white border-destructive hover:bg-white hover:text-destructive"
+            className="bg-destructive text-background border-destructive hover:bg-card hover:text-destructive"
           >
             Excluir minha conta
           </Button>
@@ -209,12 +209,12 @@ export default function ConfiguracoesPage() {
 
       {/* Modal de confirmação de exclusão (inline) */}
       {modalAberto && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
-            className="w-full max-w-md border border-black rounded bg-white p-6"
+            className="w-full max-w-md border border-border rounded bg-card p-6"
           >
             <h3 className="text-lg font-bold mb-1">Confirmar exclusão</h3>
             <p className="text-sm text-neutral-600 mb-6">
@@ -234,7 +234,7 @@ export default function ConfiguracoesPage() {
                 <Button
                   type="submit"
                   disabled={excluindo}
-                  className="bg-destructive text-white border-destructive hover:bg-white hover:text-destructive"
+                  className="bg-destructive text-background border-destructive hover:bg-card hover:text-destructive"
                 >
                   {excluindo ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Excluir conta'}
                 </Button>

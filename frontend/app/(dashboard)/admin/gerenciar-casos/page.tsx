@@ -64,10 +64,10 @@ export default function GerenciarCasosPage() {
             Nenhum caso cadastrado.
           </div>
         ) : (
-          <div className="border border-black rounded bg-white overflow-x-auto">
+          <div className="border border-border rounded bg-card overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-black text-left text-xs uppercase tracking-wider text-neutral-600">
+                <tr className="border-b border-border text-left text-xs uppercase tracking-wider text-neutral-600">
                   <th className="p-4 font-bold">Título</th>
                   <th className="p-4 font-bold">Autor / Origem</th>
                   <th className="p-4 font-bold">Área</th>

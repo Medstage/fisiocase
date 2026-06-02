@@ -22,7 +22,7 @@ export function GraficoDesempenho({ dados }: { dados: Item[] }) {
   }
 
   return (
-    <div className="border border-black rounded p-6 bg-white">
+    <div className="border border-border rounded p-6 bg-card">
       <h3 className="text-xs uppercase tracking-wider text-neutral-600 mb-4">Casos resolvidos por área</h3>
       <div style={{ width: '100%', height: Math.max(160, data.length * 40) }}>
         <ResponsiveContainer width="100%" height="100%">

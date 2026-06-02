@@ -78,17 +78,17 @@ export default function EditarPerfilPage() {
       <h1 className="text-2xl font-bold mb-8">Editar perfil</h1>
 
       <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
-        <div className="border border-black rounded p-6 bg-white space-y-6">
+        <div className="border border-border rounded p-6 bg-card space-y-6">
           <FloatingInput id="nome" label="Nome completo" required value={form.nome} onChange={(e) => set('nome', e.target.value)} />
 
-          <div className="relative border border-black bg-white rounded transition-colors duration-150 focus-within:border-green">
+          <div className="relative border border-border bg-card rounded transition-colors duration-150 focus-within:border-brand">
             <textarea
               id="bio"
               placeholder=" "
               rows={4}
               value={form.bio}
               onChange={(e) => set('bio', e.target.value)}
-              className="peer block w-full px-4 pb-2 pt-5 text-black bg-transparent border-0 outline-none focus:ring-0 resize-none text-sm"
+              className="peer block w-full px-4 pb-2 pt-5 text-foreground bg-transparent border-0 outline-none focus:ring-0 resize-none text-sm"
             />
             <label
               htmlFor="bio"

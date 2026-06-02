@@ -131,9 +131,9 @@ export default function CorrigirPage() {
 
             {/* Coluna direita: correção (sticky) */}
             <div className="lg:sticky lg:top-6 lg:self-start space-y-4">
-              <div className="border border-black rounded p-5 bg-white">
+              <div className="border border-border rounded p-5 bg-card">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold">
+                  <div className="h-10 w-10 shrink-0 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-bold">
                     {resposta.aluno.nome.charAt(0).toUpperCase()}
                   </div>
                   <div>
@@ -148,7 +148,7 @@ export default function CorrigirPage() {
                 </div>
               </div>
 
-              <div className="border border-black rounded p-5 bg-white">
+              <div className="border border-border rounded p-5 bg-card">
                 <h3 className="text-xs uppercase tracking-wider text-neutral-600 mb-2">
                   Resposta do aluno
                 </h3>
@@ -156,7 +156,7 @@ export default function CorrigirPage() {
               </div>
 
               {jaCorrigida && (
-                <div className="border border-green rounded p-4 bg-white flex items-center gap-2 text-sm">
+                <div className="border border-green rounded p-4 bg-card flex items-center gap-2 text-sm">
                   <Check className="h-4 w-4 text-green shrink-0" />
                   <span className="font-bold">Resposta já corrigida.</span>
                   <span className="ml-auto">
@@ -165,7 +165,7 @@ export default function CorrigirPage() {
                 </div>
               )}
 
-              <div className="border border-black rounded p-5 bg-white space-y-4">
+              <div className="border border-border rounded p-5 bg-card space-y-4">
                 <div>
                   <label htmlFor="feedback" className="block text-xs uppercase tracking-wider text-neutral-600 mb-2">
                     Feedback para o aluno
@@ -177,7 +177,7 @@ export default function CorrigirPage() {
                     onChange={(e) => setFeedback(e.target.value)}
                     disabled={jaCorrigida}
                     placeholder="Explique os acertos, pontos de melhoria e referências..."
-                    className="w-full border border-black rounded p-3 text-sm bg-white outline-none focus:border-green transition-colors resize-none min-h-[160px] disabled:bg-neutral-50"
+                    className="w-full border border-border rounded p-3 text-sm bg-card outline-none focus:border-brand transition-colors resize-none min-h-[160px] disabled:bg-neutral-50"
                   />
                   <p className="text-[11px] text-neutral-500 mt-1">
                     {feedback.trim().length} caracteres (mínimo 10)
@@ -208,19 +208,19 @@ export default function CorrigirPage() {
                       value={nota}
                       disabled={jaCorrigida}
                       onChange={(e) => setNota(e.target.value)}
-                      className="w-20 border border-black rounded h-10 px-3 text-sm tabular-nums outline-none focus:border-green transition-colors disabled:bg-neutral-50"
+                      className="w-20 border border-border rounded h-10 px-3 text-sm tabular-nums outline-none focus:border-brand transition-colors disabled:bg-neutral-50"
                     />
                   </div>
                 </div>
 
-                <div className="border border-black rounded p-3 bg-neutral-50 flex items-center justify-between">
+                <div className="border border-border rounded p-3 bg-neutral-50 flex items-center justify-between">
                   <span className="text-xs uppercase tracking-wider text-neutral-600">XP que será concedido</span>
                   <span className="font-bold tabular-nums">
                     {xpPreview > 0 ? `+${xpPreview} XP` : '—'}
                   </span>
                 </div>
 
-                {erro && <p className="text-sm text-red-600 font-bold">{erro}</p>}
+                {erro && <p className="text-sm text-destructive font-bold">{erro}</p>}
 
                 {!jaCorrigida && (
                   <Button

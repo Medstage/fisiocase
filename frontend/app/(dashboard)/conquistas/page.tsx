@@ -70,8 +70,8 @@ export default function ConquistasPage() {
               type="button"
               onClick={() => setAba(a.id)}
               className={cn(
-                'h-9 px-4 rounded text-xs font-bold uppercase tracking-wider border border-black transition-colors',
-                ativo ? 'bg-black text-white' : 'bg-white text-black hover:bg-neutral-100',
+                'h-9 px-4 rounded text-xs font-bold uppercase tracking-wider border border-border transition-colors',
+                ativo ? 'bg-foreground text-background' : 'bg-background text-foreground hover:bg-neutral-100',
               )}
             >
               {a.label}

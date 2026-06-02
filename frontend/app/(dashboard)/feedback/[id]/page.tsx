@@ -113,8 +113,8 @@ export default function FeedbackPage() {
       {mostrarEfeito && <ConquistaUnlocked conquistas={conquistasParaModal} onClose={() => setMostrarEfeito(false)} />}
 
       {/* Header */}
-      <header className="mb-8 border-b border-black pb-4 flex items-center gap-4">
-        <Link href="/dashboard" aria-label="Voltar" className="border border-black p-2 hover:bg-black hover:text-white transition-colors rounded">
+      <header className="mb-8 border-b border-border pb-4 flex items-center gap-4">
+        <Link href="/dashboard" aria-label="Voltar" className="border border-border p-2 hover:bg-foreground hover:text-background transition-colors rounded">
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div className="min-w-0">
@@ -128,14 +128,14 @@ export default function FeedbackPage() {
 
         {/* Progresso de nível */}
         {perfil && (
-          <div className="border border-black rounded p-6">
+          <div className="border border-border rounded p-6">
             <div className="flex items-center justify-between mb-2">
               <span className="flex items-center gap-2 text-sm font-bold">
                 <TrendingUp className="h-4 w-4 text-green" /> Nível: {prog.nivel}
               </span>
               <span className="text-xs text-neutral-600">{(perfil.xpTotal ?? 0).toLocaleString('pt-BR')} XP</span>
             </div>
-            <div className="h-3 border border-black rounded overflow-hidden">
+            <div className="h-3 border border-border rounded overflow-hidden">
               <motion.div className="h-full bg-green" initial={{ width: 0 }} animate={{ width: `${prog.pct}%` }} transition={{ duration: 0.8, ease: 'easeOut' }} />
             </div>
             {prog.proximo && <p className="text-xs text-neutral-600 mt-2">Faltam {prog.faltam.toLocaleString('pt-BR')} XP para {prog.proximo}</p>}
@@ -150,9 +150,9 @@ export default function FeedbackPage() {
               key={c.id}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="border border-black border-l-4 border-l-green rounded p-6 flex items-center gap-4"
+              className="border border-border border-l-4 border-l-green rounded p-6 flex items-center gap-4"
             >
-              <div className={`h-16 w-16 shrink-0 rounded-full border border-black bg-white flex items-center justify-center ${cor}`}>
+              <div className={`h-16 w-16 shrink-0 rounded-full border border-border bg-card flex items-center justify-center ${cor}`}>
                 <Icon className="h-8 w-8" />
               </div>
               <div className="min-w-0">
@@ -177,14 +177,14 @@ export default function FeedbackPage() {
             key={m.id}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="border border-black border-l-4 border-l-green rounded p-4 flex items-center gap-3"
+            className="border border-border border-l-4 border-l-green rounded p-4 flex items-center gap-3"
           >
             <Target className="h-5 w-5 text-green" />
             <div className="flex-1 min-w-0">
               <p className="text-xs uppercase tracking-widest text-neutral-600">Missão diária concluída</p>
               <h3 className="text-base font-bold truncate">{m.titulo}</h3>
             </div>
-            <span className="bg-black text-white rounded px-3 h-7 inline-flex items-center text-xs font-bold shrink-0">
+            <span className="bg-foreground text-background rounded px-3 h-7 inline-flex items-center text-xs font-bold shrink-0">
               +{m.xpRecompensa} XP
             </span>
           </motion.div>
@@ -197,7 +197,7 @@ export default function FeedbackPage() {
         {recursos.length > 0 && <FeedbackCard titulo="Recursos de estudo" icon={BookOpen} items={recursos} accent="neutral" />}
 
         {/* Ações */}
-        <div className="border-t border-black pt-6 flex flex-wrap gap-4">
+        <div className="border-t border-border pt-6 flex flex-wrap gap-4">
           <Link href="/novo-caso">
             <Button>Próximo caso</Button>
           </Link>
